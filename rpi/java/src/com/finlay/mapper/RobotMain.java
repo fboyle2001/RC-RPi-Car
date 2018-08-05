@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.finlay.mapper.connection.SocketServer;
+import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
+import com.finlay.mapper.connection.outgoing.lookup.CodeMessageLookup;
 
 import lib.finlay.core.collections.TreeMapBuilder;
 import lib.finlay.core.io.ConfigurationDetails;
@@ -86,8 +88,25 @@ public class RobotMain {
 		}
 	}
 	
+	public void stop() {
+		logger.info("Server shutting down");
+		
+		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
+				.setStatusCode(CodeMessageLookup.GONE)
+				.build();
+		server.broadcast(message.toJson());
+		
+		try {
+			server.stop();
+		} catch (IOException | InterruptedException e) {
+			logger.error("{}", e);
+		}
+		
+		logger.info("Shutdown complete");
+		
+	}
+
 	public static void main(String[] args) {
 		getInstance().start();
 	}
-	
 }

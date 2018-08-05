@@ -1,0 +1,4 @@
+2018-08-05 19:27:56:251 +0100 [main] INFO com.finlay.mapper.RobotMain - Loading configuration file...
+2018-08-05 19:27:56:258 +0100 [main] INFO com.finlay.mapper.RobotMain - Loaded configuration file
+2018-08-05 19:27:56:270 +0100 [main] INFO com.finlay.mapper.RobotMain - Completed start up
+2018-08-05 19:27:56:368 +0100 [WebsocketSelector16] INFO com.finlay.mapper.connection.SocketServer - Server has started

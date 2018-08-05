@@ -66,6 +66,11 @@ public class JSONOutgoingMessage {
 			return this;
 		}
 		
+		public Builder setStatusCode(CodeMessageLookup lookupItem) {
+			this.code = lookupItem.getCode();
+			return this;
+		}
+		
 		public Builder setStatusMessage(String message) {
 			this.message = message;
 			return this;

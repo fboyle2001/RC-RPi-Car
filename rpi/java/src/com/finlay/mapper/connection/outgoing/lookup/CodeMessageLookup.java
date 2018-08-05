@@ -7,6 +7,7 @@ public enum CodeMessageLookup {
 	BAD_REQUEST(400, "Bad request; check parameters", new BadRequestLookup()),
 	FORBIDDEN(403, "Forbidden; incorrect auth key", null),
 	NOT_FOUND(404, "Operation not found", null),
+	GONE(410, "Server gone", null),
 	SERVER_ERROR(500, "Internal server error; check log", null),
 	UNAVAILABLE(503, "Server already has a client", null);
 	
