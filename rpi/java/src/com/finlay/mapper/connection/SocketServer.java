@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.finlay.mapper.connection.message.JSONMessage;
 
+import lib.finlay.core.events.EventManager;
+
 public class SocketServer extends WebSocketServer {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
@@ -67,6 +69,7 @@ public class SocketServer extends WebSocketServer {
 	@Override
 	public void onStart() {
 		logger.info("Server has started");
+		EventManager.start();
 	}
 	
 	public static void main(String[] args) {

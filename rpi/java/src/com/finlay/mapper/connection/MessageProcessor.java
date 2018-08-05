@@ -7,29 +7,31 @@ import com.finlay.mapper.connection.message.JSONMessage;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
+import lib.finlay.core.events.EventManager;
+
 public class MessageProcessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageProcessor.class);
 	private static final Gson gson = new Gson();
 	
 	public static void process(String message) {
-		JSONMessage readable;
+		JSONMessage usable;
 		
 		try {
-			readable = gson.fromJson(message, JSONMessage.class);
+			usable = gson.fromJson(message, JSONMessage.class);
 		} catch (JsonParseException ex) {
 			logger.error("Unable to parse message");
 			logger.error(ex.getMessage());
 			return;
 		}
 		
-		if(readable == null || readable.getStatus() == null) {
+		if(usable == null || usable.getStatus() == null) {
 			logger.error("Unable to parse message");
 			return;
 		}
 		
 		logger.info("Parsed message successfully");
-		System.out.println(readable.getStatus());
+		EventManager.callEvent(new MessageEvent(usable));
 	}
 
 }
