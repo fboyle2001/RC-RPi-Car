@@ -1,0 +1,11 @@
+{
+    "status": {
+        "code": <HTTP STATUS CODE>,
+        "message": <ASSOCIATED MESSAGE>
+    },
+    "content": {
+        "k1": "v1",
+        "k2": "v2",
+        ...
+    }
+}

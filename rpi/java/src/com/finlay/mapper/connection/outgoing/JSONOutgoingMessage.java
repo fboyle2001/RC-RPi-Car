@@ -1,4 +1,4 @@
-package com.finlay.mapper.connection.message;
+package com.finlay.mapper.connection.outgoing;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,21 +6,19 @@ import java.util.Map.Entry;
 
 import com.google.gson.Gson;
 
-public class JSONMessage {
+public class JSONOutgoingMessage {
 	
 	private static final Gson gson = new Gson();
 	
-	private JSONMessageStatus status;
+	private JSONOutgoingStatus status;
 	private Map<String, Object> content;
 	
-	public JSONMessage() {}
-	
-	private JSONMessage(JSONMessageStatus status, Map<String, Object> content) {
+	private JSONOutgoingMessage(JSONOutgoingStatus status, Map<String, Object> content) {
 		this.status = status;
 		this.content = content;
 	}
 	
-	public JSONMessageStatus getStatus() {
+	public JSONOutgoingStatus getStatus() {
 		return status;
 	}
 	
@@ -88,7 +86,7 @@ public class JSONMessage {
 			return this;
 		}
 		
-		public JSONMessage build() {
+		public JSONOutgoingMessage build() {
 			if(code == -1) {
 				throw new RuntimeException("Status code must be set");
 			}
@@ -97,7 +95,7 @@ public class JSONMessage {
 				message = CodeMessageLookup.getDefaultMessage(code);
 			}
 			
-			return new JSONMessage(new JSONMessageStatus(code, message), content);
+			return new JSONOutgoingMessage(new JSONOutgoingStatus(code, message), content);
 		}
 		
 	}

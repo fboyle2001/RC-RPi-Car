@@ -1,0 +1,11 @@
+{
+    "key": <AUTH KEY HERE>,
+    "request": {
+        "type": <REQUEST TYPE ID>,
+        "data": {
+            "param1": "v1",
+            "param2": "v2",
+            ...
+        }
+    }
+}

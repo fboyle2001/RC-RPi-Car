@@ -1,13 +1,13 @@
-package com.finlay.mapper.connection.message;
+package com.finlay.mapper.connection.outgoing;
 
-public class JSONMessageStatus {
+public class JSONOutgoingStatus {
 
 	private int code;
 	private String message;
 	
-	public JSONMessageStatus() {}
+	public JSONOutgoingStatus() {}
 	
-	protected JSONMessageStatus(int code, String message) {
+	protected JSONOutgoingStatus(int code, String message) {
 		this.code = code;
 		this.message = message;
 	}

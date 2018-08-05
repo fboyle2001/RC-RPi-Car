@@ -1,4 +1,4 @@
-package com.finlay.mapper.connection.message;
+package com.finlay.mapper.connection.outgoing;
 
 public enum CodeMessageLookup {
 

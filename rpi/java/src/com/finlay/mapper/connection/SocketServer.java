@@ -8,7 +8,7 @@ import org.java_websocket.server.WebSocketServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.finlay.mapper.connection.message.JSONMessage;
+import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
 
 import lib.finlay.core.events.EventManager;
 
@@ -33,7 +33,7 @@ public class SocketServer extends WebSocketServer {
 		
 		if(connected) {
 			logger.info("Rejected as already connected to client");
-			JSONMessage message = new JSONMessage.Builder().setStatusCode(503).build();
+			JSONOutgoingMessage message = new JSONOutgoingMessage.Builder().setStatusCode(503).build();
 			System.out.println(message.toJson());
 			conn.send(message.toJson());
 			return;

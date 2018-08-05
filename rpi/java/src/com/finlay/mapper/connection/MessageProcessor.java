@@ -3,7 +3,7 @@ package com.finlay.mapper.connection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.finlay.mapper.connection.message.JSONMessage;
+import com.finlay.mapper.connection.incoming.JSONIncomingMessage;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -15,23 +15,23 @@ public class MessageProcessor {
 	private static final Gson gson = new Gson();
 	
 	public static void process(String message) {
-		JSONMessage usable;
+		JSONIncomingMessage incoming;
 		
 		try {
-			usable = gson.fromJson(message, JSONMessage.class);
+			incoming = gson.fromJson(message, JSONIncomingMessage.class);
 		} catch (JsonParseException ex) {
 			logger.error("Unable to parse message");
 			logger.error(ex.getMessage());
 			return;
 		}
 		
-		if(usable == null || usable.getStatus() == null) {
+		if(incoming == null || incoming.getKey() == null) {
 			logger.error("Unable to parse message");
 			return;
 		}
 		
 		logger.info("Parsed message successfully");
-		EventManager.callEvent(new MessageEvent(usable));
+		EventManager.callEvent(new MessageEvent(incoming));
 	}
 
 }

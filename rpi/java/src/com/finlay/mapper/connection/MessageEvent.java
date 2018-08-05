@@ -1,18 +1,18 @@
 package com.finlay.mapper.connection;
 
-import com.finlay.mapper.connection.message.JSONMessage;
+import com.finlay.mapper.connection.incoming.JSONIncomingMessage;
 
 import lib.finlay.core.events.Event;
 
 public class MessageEvent extends Event {
 
-	private JSONMessage message;
+	private JSONIncomingMessage message;
 	
-	public MessageEvent(JSONMessage message) {
+	public MessageEvent(JSONIncomingMessage message) {
 		this.message = message;
 	}
 	
-	public JSONMessage getMessage() {
+	public JSONIncomingMessage getMessage() {
 		return message;
 	}
 	
