@@ -1,5 +1,4 @@
 /bin/
 /target/
 /exports/
-org.eclipse.m2e.core.prefs
-org.eclipse.jdt.core.prefs
+/.settings/
