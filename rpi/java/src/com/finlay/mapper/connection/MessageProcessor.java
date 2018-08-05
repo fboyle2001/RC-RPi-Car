@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import com.finlay.mapper.connection.incoming.JSONIncomingMessage;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
+import com.finlay.mapper.handlers.RequestType;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -45,7 +46,9 @@ public class MessageProcessor {
 		}
 		
 		logger.info("Parsed message successfully");
-		EventManager.callEvent(new MessageEvent(incoming));
+		
+		RequestType type = RequestType.getByType(incoming.getRequest().getType());
+		EventManager.callEvent(new MessageReceivedEvent(type, incoming, connection));
 	}
 
 	public static void setAuthKey(String authKey) {

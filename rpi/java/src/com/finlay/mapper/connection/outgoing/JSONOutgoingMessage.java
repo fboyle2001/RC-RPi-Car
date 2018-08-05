@@ -27,22 +27,6 @@ public class JSONOutgoingMessage {
 		return content;
 	}
 	
-	public String getString(String key) {
-		return content.get(key).toString();
-	}
-	
-	public boolean getBoolean(String key) {
-		return Boolean.parseBoolean(getString(key));
-	}
-	
-	public int getInteger(String key) throws NumberFormatException {
-		return Integer.parseInt(getString(key));
-	}
-	
-	public double getDouble(String key) throws NumberFormatException {
-		return Double.parseDouble(getString(key));
-	}
-	
 	public String toJson() {
 		return gson.toJson(this);
 	}

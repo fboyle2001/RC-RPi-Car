@@ -78,37 +78,44 @@ public class PiconZero {
 	}
 	
 	public void forward(int speed) {
+		logger.info("Attempting to set forward speed to {}", speed);
 		setMotorSpeed(0, speed);
 		setMotorSpeed(1, speed);
 	}
 	
-	public void backwards(int speed) {
+	public void reverse(int speed) {
+		logger.info("Attempting to set reverse speed to {}", speed);
 		setMotorSpeed(0, -speed);
 		setMotorSpeed(1, -speed);
 	}
 	
 	public void right(int speed) {
+		logger.info("Attempting to set right speed to {}", speed);
 		setMotorSpeed(0, speed);
 		setMotorSpeed(1, -speed);
 	}
 	
 	public void left(int speed) {
+		logger.info("Attempting to set left speed to {}", speed);
 		setMotorSpeed(0, -speed);
 		setMotorSpeed(1, speed);
 	}
 	
 	public void stopMotion() {
+		logger.info("Attempting to halt motion");
 		setMotorSpeed(0, 0);
 		setMotorSpeed(1, 0);
 	}
 	
 	public double calculateDistanceToObject() {
+		logger.info("Attempting to calculate distance to object");
 		ultrasonicSensor.setMode(PinMode.DIGITAL_OUTPUT);
 		ultrasonicSensor.high();
 		
 		try {
 			Thread.sleep(1);
 		} catch (InterruptedException e) {
+			logger.error("Unable to read distance");
 			logger.error("{}", e);
 			return -1;
 		}

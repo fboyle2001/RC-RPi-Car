@@ -7,6 +7,8 @@ public class BadRequestLookup extends SpecificLookup {
 		switch(specific) {
 		case 1:
 			return "Invalid format";
+		case 2:
+			return "Non-integer speed given";
 		default:
 			return CodeMessageLookup.getDefaultMessage(400);
 		}
