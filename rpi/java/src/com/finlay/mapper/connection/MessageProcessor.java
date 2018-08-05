@@ -37,7 +37,7 @@ public class MessageProcessor {
 			return;
 		}
 		
-		if(incoming.getAuthKey() != authKey) {
+		if(!incoming.getAuthKey().equals(authKey)) {
 			JSONOutgoingMessage forbidden = new JSONOutgoingMessage.Builder().setStatusCode(403).build();
 			connection.send(forbidden.toJson());
 			logger.warn("Invalid auth key given");

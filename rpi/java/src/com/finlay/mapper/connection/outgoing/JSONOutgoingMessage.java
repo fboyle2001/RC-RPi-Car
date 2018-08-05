@@ -107,7 +107,7 @@ public class JSONOutgoingMessage {
 				message = CodeMessageLookup.getDefaultMessage(code);
 			}
 			
-			return new JSONOutgoingMessage(new JSONOutgoingStatus(code, message), content);
+			return new JSONOutgoingMessage(new JSONOutgoingStatus(code, message, specific), content);
 		}
 		
 	}
