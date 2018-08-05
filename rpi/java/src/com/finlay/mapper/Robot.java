@@ -16,7 +16,6 @@ import com.pi4j.io.gpio.RaspiPinNumberingScheme;
 
 import lib.finlay.core.collections.TreeMapBuilder;
 import lib.finlay.core.events.EventManager;
-import lib.finlay.core.events.usable.UsableEventCalls;
 import lib.finlay.core.io.ConfigurationDetails;
 import lib.finlay.core.io.ConfigurationFile;
 
@@ -55,8 +54,13 @@ public class Robot {
 		logger.info("Loaded configuration file");
 		
 		EventManager.start();
-		UsableEventCalls.registerEventCalls();
 		logger.info("Event Manager started");
+		
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			stop();
+		}));
+		
+		logger.info("Added shutdown hook");
 
 		if(hardware) {
 			GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));

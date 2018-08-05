@@ -28,9 +28,9 @@ public class MotionHandler {
 		int speed;
 		
 		try {
-			speed = event.getMessage().getRequest().getInteger("speed");
+			speed = (int) event.getMessage().getRequest().getDouble("speed");
 		} catch (NumberFormatException e) {
-			logger.warn("Non-integer speed received");
+			logger.warn("Non-integer speed instead received {}", event.getMessage().getRequest().getString("speed"));
 			JSONOutgoingMessage message = new JSONOutgoingMessage.Builder().setStatusCode(400).setStatusSpecific(2).build();
 			event.getConnection().send(message.toJson());
 			return;
