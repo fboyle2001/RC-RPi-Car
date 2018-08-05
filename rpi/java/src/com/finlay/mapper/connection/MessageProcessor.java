@@ -27,7 +27,7 @@ public class MessageProcessor {
 		} catch (JsonParseException ex) {
 			connection.send(badRequest.toJson());
 			logger.error("Unable to parse message");
-			logger.error(ex.getMessage());
+			logger.error("{}", ex);
 			return;
 		}
 		
@@ -49,6 +49,7 @@ public class MessageProcessor {
 	}
 
 	public static void setAuthKey(String authKey) {
+		logger.info("Updated auth key");
 		MessageProcessor.authKey = authKey;
 	}
 

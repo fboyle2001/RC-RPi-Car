@@ -71,18 +71,13 @@ public class SocketServer extends WebSocketServer {
 	@Override
 	public void onError(WebSocket conn, Exception ex) {
 		logger.error("Error encountered");
-		logger.error(ex.getMessage());
+		logger.error("{}", ex);
 	}
 
 	@Override
 	public void onStart() {
 		logger.info("Server has started");
 		EventManager.start();
-	}
-	
-	public static void main(String[] args) {
-		SocketServer server = new SocketServer(5612);
-		server.start();
 	}
 
 }
