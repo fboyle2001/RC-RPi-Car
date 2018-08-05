@@ -4,6 +4,7 @@ public class JSONOutgoingStatus {
 
 	private int code;
 	private String message;
+	private int specific;
 	
 	public JSONOutgoingStatus() {}
 	

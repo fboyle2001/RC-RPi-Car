@@ -2,13 +2,13 @@ package com.finlay.mapper.connection.incoming;
 
 public class JSONIncomingMessage {
 
-	private String key;
+	private String authKey;
 	private JSONIncomingRequest request;
 	
 	public JSONIncomingMessage() {}
 	
-	public String getKey() {
-		return key;
+	public String getAuthKey() {
+		return authKey;
 	}
 	
 	public JSONIncomingRequest getRequest() {

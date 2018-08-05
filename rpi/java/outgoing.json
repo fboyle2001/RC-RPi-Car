@@ -1,7 +1,8 @@
 {
     "status": {
         "code": <HTTP STATUS CODE>,
-        "message": <ASSOCIATED MESSAGE>
+        "message": <ASSOCIATED MESSAGE>,
+        "specific": <SPECIFIC ERROR>
     },
     "content": {
         "k1": "v1",

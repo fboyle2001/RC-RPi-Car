@@ -1,6 +1,7 @@
 package com.finlay.mapper.connection;
 
 import java.net.InetSocketAddress;
+import java.util.UUID;
 
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -34,12 +35,19 @@ public class SocketServer extends WebSocketServer {
 		if(connected) {
 			logger.info("Rejected as already connected to client");
 			JSONOutgoingMessage message = new JSONOutgoingMessage.Builder().setStatusCode(503).build();
-			System.out.println(message.toJson());
 			conn.send(message.toJson());
 			return;
 		}
 		
-		logger.info("Connection accepted");
+		//could add some username and password auth but probably unnecessary
+		
+		String authKey = UUID.randomUUID().toString();
+		MessageProcessor.setAuthKey(authKey);
+		
+		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder().setStatusCode(201).setKeyValue("authKey", authKey).build();
+		conn.send(message.toJson());
+		
+		logger.info("Connection accepted; auth key sent");
 		this.connected = true;
 	}
 
@@ -57,7 +65,7 @@ public class SocketServer extends WebSocketServer {
 		}
 
 		logger.info("Received {}", message);
-		MessageProcessor.process(message);
+		MessageProcessor.process(conn, message);
 	}
 
 	@Override

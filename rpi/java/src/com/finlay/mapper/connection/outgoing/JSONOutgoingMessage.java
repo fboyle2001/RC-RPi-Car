@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.finlay.mapper.connection.outgoing.lookup.CodeMessageLookup;
 import com.google.gson.Gson;
 
 public class JSONOutgoingMessage {
@@ -50,11 +51,13 @@ public class JSONOutgoingMessage {
 		
 		private int code;
 		private String message;
+		private int specific;
 		private Map<String, Object> content;
 		
 		public Builder() {
 			this.code = -1;
 			this.message = null;
+			this.specific = 0;
 			this.content = new HashMap<>();
 		}
 		
@@ -65,6 +68,11 @@ public class JSONOutgoingMessage {
 		
 		public Builder setStatusMessage(String message) {
 			this.message = message;
+			return this;
+		}
+		
+		public Builder setStatusSpecific(int specific) {
+			this.specific = specific;
 			return this;
 		}
 		
@@ -89,6 +97,10 @@ public class JSONOutgoingMessage {
 		public JSONOutgoingMessage build() {
 			if(code == -1) {
 				throw new RuntimeException("Status code must be set");
+			}
+			
+			if(specific != 0) {
+				message = CodeMessageLookup.getSpecific(code).getMessage(specific);
 			}
 			
 			if(message == null) {
