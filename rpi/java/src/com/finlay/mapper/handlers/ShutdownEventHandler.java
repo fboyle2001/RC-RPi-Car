@@ -1,6 +1,6 @@
 package com.finlay.mapper.handlers;
 
-import com.finlay.mapper.RobotMain;
+import com.finlay.mapper.Robot;
 
 import lib.finlay.core.events.EventListener;
 import lib.finlay.core.events.EventMethod;
@@ -11,7 +11,7 @@ public class ShutdownEventHandler {
 
 	@EventMethod
 	public void onShutdown(SystemExitEvent event) {
-		RobotMain.getInstance().stop();
+		Robot.getInstance().stop();
 	}
 	
 }

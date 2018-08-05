@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.finlay.mapper.RobotMain;
+import com.finlay.mapper.Robot;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalMultipurpose;
 import com.pi4j.io.gpio.PinMode;
@@ -18,6 +18,7 @@ import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
 public class PiconZero {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PiconZero.class);
+	
 	private static PiconZero instance = null;
 	
 	public static final PiconZero getInstance() {
@@ -35,14 +36,14 @@ public class PiconZero {
 	
 	private PiconZero() {
 		try {
-			this.retries = RobotMain.getInstance().getConfig().getInteger("retries");
+			this.retries = Robot.getInstance().getConfig().getInteger("retries");
 		} catch (NumberFormatException e) {
 			logger.warn("Invalid number of retries, defaulting to 10");
 			this.retries = 10;
 		}
 
 		try {
-			this.speedOfSound = RobotMain.getInstance().getConfig().getInteger("speedOfSound");
+			this.speedOfSound = Robot.getInstance().getConfig().getInteger("speedOfSound");
 		} catch (NumberFormatException e) {
 			logger.warn("Invalid number for speed of sound, defaulting to 343");
 			this.speedOfSound = 343;

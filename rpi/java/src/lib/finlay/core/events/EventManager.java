@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
-import lib.finlay.core.events.usable.UsableEventCalls;
 
 /**
  * Manages events allowing them to be called from any class to trigger other actions.
@@ -40,7 +39,6 @@ public final class EventManager {
 		eventHandlers = new TreeMap<>();
 		loadEvents();
 		loadEventMethods();
-		UsableEventCalls.registerEventCalls();
 	}
 	
 	/**
@@ -51,7 +49,6 @@ public final class EventManager {
 	 * @throws UnknownEventException Thrown if the event parameter is not a valid, loaded event.
 	 * @throws ListenerInvocationException Thrown if the invocation of a listening method fails.
 	 */
-	@SuppressWarnings("deprecation")
 	public static boolean callEvent(Event event) {
 		if(event == null) {
 			throw new NullPointerException("Event parameter cannot be null.");
@@ -89,6 +86,7 @@ public final class EventManager {
 		for(Class<? extends Event> event : potentialEvents) {
 			if(!Modifier.isAbstract(event.getModifiers()) && Modifier.isPublic(event.getModifiers())) {
 				events.add(event);
+				System.out.println(event.getCanonicalName());
 			}
 		}
 	}

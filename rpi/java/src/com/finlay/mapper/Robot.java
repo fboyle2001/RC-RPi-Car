@@ -16,32 +16,28 @@ import com.pi4j.io.gpio.RaspiPinNumberingScheme;
 
 import lib.finlay.core.collections.TreeMapBuilder;
 import lib.finlay.core.events.EventManager;
+import lib.finlay.core.events.usable.UsableEventCalls;
 import lib.finlay.core.io.ConfigurationDetails;
 import lib.finlay.core.io.ConfigurationFile;
 
-public class RobotMain {
+public class Robot {
 
-	private static final RobotMain instance;
-	private static final Logger logger;
+	private static final Logger logger = LoggerFactory.getLogger(Robot.class);
 	
-	static {
-		//System.setProperty(SimpleLogger.LOG_FILE_KEY, "log_file.log");
-		//System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
-		//System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "yyyy-MM-dd HH:mm:ss:SSS Z");
-		logger = LoggerFactory.getLogger(RobotMain.class);
-		instance = new RobotMain();
-	}
+	protected static Robot instance;
 	
-	public static RobotMain getInstance() {
+	public static Robot getInstance() {
 		return instance;
 	}
 	
+	private boolean hardware;
 	private boolean started;
 	private ConfigurationFile config;
 	private SocketServer server;
 	
-	public RobotMain() {
+	public Robot(boolean hardware) {
 		this.started = false;
+		this.hardware = hardware;
 	}
 	
 	public void start() {
@@ -59,10 +55,15 @@ public class RobotMain {
 		logger.info("Loaded configuration file");
 		
 		EventManager.start();
+		UsableEventCalls.registerEventCalls();
 		logger.info("Event Manager started");
 
-		GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));
-		logger.info("Set pin provider to BCM");
+		if(hardware) {
+			GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));
+			logger.info("Set pin provider to BCM");
+		} else {
+			logger.info("--no-hardware option enabled, pin provider not set");
+		}
 		
 		this.server = new SocketServer(port);
 		server.start();
@@ -116,9 +117,5 @@ public class RobotMain {
 		
 		logger.info("Shutdown complete");
 		
-	}
-
-	public static void main(String[] args) {
-		getInstance().start();
 	}
 }
