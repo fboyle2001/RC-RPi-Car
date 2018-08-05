@@ -10,8 +10,12 @@ import org.slf4j.LoggerFactory;
 import com.finlay.mapper.connection.SocketServer;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
 import com.finlay.mapper.connection.outgoing.lookup.CodeMessageLookup;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.RaspiGpioProvider;
+import com.pi4j.io.gpio.RaspiPinNumberingScheme;
 
 import lib.finlay.core.collections.TreeMapBuilder;
+import lib.finlay.core.events.EventManager;
 import lib.finlay.core.io.ConfigurationDetails;
 import lib.finlay.core.io.ConfigurationFile;
 
@@ -41,9 +45,7 @@ public class RobotMain {
 	}
 	
 	public void start() {
-		logger.info("Loading configuration file...");
 		loadConfig();
-		logger.info("Loaded configuration file");
 		
 		int port;
 		
@@ -53,6 +55,14 @@ public class RobotMain {
 			logger.warn("Invalid port number given, defaulting to 5612");
 			port = 5612;
 		}
+		
+		logger.info("Loaded configuration file");
+		
+		EventManager.start();
+		logger.info("Event Manager started");
+
+		GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));
+		logger.info("Set pin provider to BCM");
 		
 		this.server = new SocketServer(port);
 		server.start();
@@ -72,6 +82,8 @@ public class RobotMain {
 	private void loadConfig() {
 		TreeMap<String, String> defaultPairings = new TreeMapBuilder<String, String>()
 				.put("port", "5612")
+				.put("retries", "10")
+				.put("speedOfSound", "343")
 				.build();
 		
 		ConfigurationDetails configDetails = new ConfigurationDetails.Builder()
