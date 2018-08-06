@@ -55,11 +55,6 @@ public class Robot {
 		
 		EventManager.start();
 		logger.info("Event Manager started");
-		
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			stop();
-		}));
-		
 		logger.info("Added shutdown hook");
 
 		if(hardware) {
@@ -98,7 +93,7 @@ public class Robot {
 				.build();
 		
 		try {
-			this.config = new ConfigurationFile(configDetails);
+			this.config = ConfigurationFile.createConfigurationOf(getClass(), configDetails);
 		} catch (IOException e) {
 			logger.error("Unable to create config");
 			logger.error("{}", e);
