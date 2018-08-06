@@ -20,6 +20,9 @@ public class Driver {
 		Option logToFile = new Option("l", "log-to-file", true, "Enable to log to external file");
 		options.addOption(logToFile);
 		
+		Option debug = new Option("d", "debug", false, "Enable to receive debug log messages");
+		options.addOption(debug);
+		
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter helpFormatter = new HelpFormatter();
 		CommandLine cmd;
@@ -38,6 +41,14 @@ public class Driver {
 			System.setProperty(SimpleLogger.LOG_FILE_KEY, logFile);
 			System.setProperty(SimpleLogger.SHOW_DATE_TIME_KEY, "true");
 			System.setProperty(SimpleLogger.DATE_TIME_FORMAT_KEY, "yyyy-MM-dd HH:mm:ss:SSS Z");
+		} else {
+			System.setProperty(SimpleLogger.LOG_FILE_KEY, "System.out");
+		}
+		
+		if(cmd.hasOption("debug")) {
+			System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "debug");
+		} else {
+			System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "info");
 		}
 		
 		boolean hardware = !cmd.hasOption("no-hardware");

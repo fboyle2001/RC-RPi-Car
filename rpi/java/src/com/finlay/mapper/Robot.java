@@ -75,10 +75,6 @@ public class Robot {
 		return started;
 	}
 	
-	public ConfigurationFile getConfig() {
-		return config;
-	}
-	
 	private void loadConfig() {
 		TreeMap<String, String> defaultPairings = new TreeMapBuilder<String, String>()
 				.put("port", "5612")

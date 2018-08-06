@@ -15,6 +15,8 @@ import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
 import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
 
+import lib.finlay.core.io.ConfigurationFile;
+
 public class PiconZero {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PiconZero.class);
@@ -36,14 +38,14 @@ public class PiconZero {
 	
 	private PiconZero() {
 		try {
-			this.retries = Robot.getInstance().getConfig().getInteger("retries");
+			this.retries = ConfigurationFile.getConfigurationOf(Robot.class).getInteger("retries");
 		} catch (NumberFormatException e) {
 			logger.warn("Invalid number of retries, defaulting to 10");
 			this.retries = 10;
 		}
 
 		try {
-			this.speedOfSound = Robot.getInstance().getConfig().getInteger("speedOfSound");
+			this.speedOfSound = ConfigurationFile.getConfigurationOf(Robot.class).getInteger("speedOfSound");
 		} catch (NumberFormatException e) {
 			logger.warn("Invalid number for speed of sound, defaulting to 343");
 			this.speedOfSound = 343;
@@ -64,6 +66,7 @@ public class PiconZero {
 			for(int i = 0; i < retries; i++) {
 				try {
 					device.write(motor, (byte) value);
+					logger.info("Set motor {} speed to {}", motor, value);
 					return;
 				} catch (IOException e) {
 					logger.info("Trying to set motor speed, attempt {} of {}", i + 1, retries);
