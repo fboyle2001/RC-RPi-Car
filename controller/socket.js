@@ -23,16 +23,16 @@ var SocketConnection = function (onMessage, onError, onConnectionFailure) {
 
           if(status == 503) {
             onConnectionFailure();
-            return;
+            return false;
           }
 
           if(status == 201) {
             self.authKey = response.content.authKey;
-            return;
+            return true;
           }
 
           console.log("Unexpected code " + status);
-          return;
+          return false;
         }
 
         onMessage(response);
@@ -41,18 +41,3 @@ var SocketConnection = function (onMessage, onError, onConnectionFailure) {
     }
   };
 };
-
-function onMessage(response) {
-  console.log(response);
-}
-
-function onError() {
-  console.log("E");
-}
-
-function onConnectionFailure() {
-  console.log("Either down or connected already");
-}
-
-var socket = SocketConnection(onMessage, onError, onConnectionFailure);
-socket.init("10.0.0.14", 5612);

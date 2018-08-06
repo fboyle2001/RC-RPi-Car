@@ -74,7 +74,7 @@ public class SocketServer extends WebSocketServer {
 
 	@Override
 	public void onStart() {
-		logger.info("Server has started on " + getAddress());
+		logger.info("Server has started");
 	}
 
 }
