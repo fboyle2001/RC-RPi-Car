@@ -7,7 +7,9 @@ public enum RequestType {
 	MOTION_RIGHT(3),
 	MOTION_LEFT(4),
 	MOTION_HALT(5),
-	SENSOR_MEASURE_DISTANCE(6);
+	SENSOR_MEASURE_DISTANCE(6),
+	TEST_CONNECTION(7),
+	SHUTDOWN(8);
 	
 	private int type;
 	

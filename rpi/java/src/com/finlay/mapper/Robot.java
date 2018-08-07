@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.impl.SimpleLogger;
 
 import com.finlay.mapper.connection.SocketServer;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
@@ -29,6 +30,10 @@ public class Robot {
 		return instance;
 	}
 	
+	public static boolean isHardwareConnected() {
+		return instance.hardware;
+	}
+	
 	private boolean hardware;
 	private boolean started;
 	private ConfigurationFile config;
@@ -40,6 +45,7 @@ public class Robot {
 	}
 	
 	public void start() {
+		logger.info("Logger started, lowest log level is {}", System.getProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY));
 		loadConfig();
 		
 		int port;

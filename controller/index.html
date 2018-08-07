@@ -4,6 +4,14 @@
     <script src="jquery-3.3.1.min.js"></script>
     <script src="socket.js"></script>
     <script src="requests.js"></script>
+    <style>
+      pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+      .string { color: green; }
+      .number { color: darkorange; }
+      .boolean { color: blue; }
+      .null { color: magenta; }
+      .key { color: red; }
+    </style>
   </head>
   <body>
     <div id="initial">
@@ -15,7 +23,19 @@
       <p id="connect_err"></p>
     </div>
     <div id="controls" style="display: none;">
-      <p>Connected!</p>
+      <p id="connected">Connected</p>
+      <p>Last Response:</p>
+      <pre id="last_response"></pre>
+      <table style="">
+        <tr><td>Forward</td><td><button id="motion_forward">Perform</button></td></tr>
+        <tr><td>Reverse</td><td><button id="motion_reverse">Perform</button></td></tr>
+        <tr><td>Right</td><td><button id="motion_right">Perform</button></td></tr>
+        <tr><td>Left</td><td><button id="motion_left">Perform</button></td></tr>
+        <tr><td>HALT</td><td><button id="motion_halt">Perform</button></td></tr>
+        <tr><td>Measure Distance</td><td><button id="sensor_distance">Perform</button></td></tr>
+        <tr><td>Test Connection</td><td><button id="test_connection">Perform</button></td></tr>
+        <tr><td>Shutdown</td><td><button id="shutdown">Perform</button></td></tr>
+      </table>
     </div>
   </body>
 </html>
