@@ -72,32 +72,32 @@ $(document).ready(function () {
 
   $("#motion_forward").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(1, {speed: 20});
+    socket.sendRequest(1, {speed: 70});
   });
 
   $("#motion_reverse").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(2, {speed: 20});
+    socket.sendRequest(2, {speed: 70});
   });
 
   $("#motion_right").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(3, {speed: 20});
+    socket.sendRequest(3, {speed: 70});
   });
 
   $("#motion_left").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(4, {speed: 20});
+    socket.sendRequest(4, {speed: 70});
   });
 
   $("#motion_halt").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(5, {speed: 0});
+    socket.sendRequest(5);
   });
 
   $("#sensor_distance").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(6, {});
+    socket.sendRequest(6);
   });
 
   $("#test_connection").click(function (e) {
@@ -107,16 +107,16 @@ $(document).ready(function () {
 
   $("#shutdown").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(8, {});
+    socket.sendRequest(8);
   });
 
   $("#auto_move_start").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(9, {});
+    socket.sendRequest(9);
   });
 
   $("#auto_move_stop").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(10, {});
+    socket.sendRequest(10);
   });
 });

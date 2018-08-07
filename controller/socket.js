@@ -2,7 +2,7 @@ var SocketConnection = function (onMessage, onError, onConnectionFailure) {
   return {
     socket: "",
     authKey: "",
-    sendRequest: function(type, data, self = this) {
+    sendRequest: function(type, data = {}, self = this) {
       var req = JSON.stringify({
         authKey: this.authKey,
         request: {

@@ -31,8 +31,9 @@ public class AutoMoveRunnable implements Runnable {
 					PiconZero.getInstance().forward(speed);
 				}
 			} else {
-				logger.info("Calculating turn");
+				logger.info("Motion halted; calculating turn");
 				// TODO: need to make a working version for this to be done
+				PiconZero.getInstance().stopMotion();
 			}
 			
 			double endTime = System.nanoTime();

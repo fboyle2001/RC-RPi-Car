@@ -83,25 +83,25 @@ public class PiconZero {
 	public void forward(int speed) {
 		logger.info("Attempting to set forward speed to {}", speed);
 		setMotorSpeed(0, speed);
-		setMotorSpeed(1, speed);
+		setMotorSpeed(1, -speed);
 	}
 	
 	public void reverse(int speed) {
 		logger.info("Attempting to set reverse speed to {}", speed);
 		setMotorSpeed(0, -speed);
-		setMotorSpeed(1, -speed);
+		setMotorSpeed(1, speed);
 	}
 	
 	public void right(int speed) {
 		logger.info("Attempting to set right speed to {}", speed);
 		setMotorSpeed(0, speed);
-		setMotorSpeed(1, -speed);
+		setMotorSpeed(1, speed);
 	}
 	
 	public void left(int speed) {
 		logger.info("Attempting to set left speed to {}", speed);
 		setMotorSpeed(0, -speed);
-		setMotorSpeed(1, speed);
+		setMotorSpeed(1, -speed);
 	}
 	
 	public void stopMotion() {
