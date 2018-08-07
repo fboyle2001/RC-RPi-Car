@@ -65,8 +65,13 @@ public class MotionHandler {
 			break;
 		default:
 			break;
-		
 		}
+
+		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
+				.setStatusCode(200)
+				.build();
+		
+		event.getConnection().send(message.toJson());
 	}
 	
 }
