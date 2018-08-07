@@ -9,7 +9,9 @@ public enum RequestType {
 	MOTION_HALT(5),
 	SENSOR_MEASURE_DISTANCE(6),
 	TEST_CONNECTION(7),
-	SHUTDOWN(8);
+	SHUTDOWN(8),
+	AUTO_MOVE_START(9),
+	AUTO_MOVE_STOP(10);
 	
 	private int type;
 	

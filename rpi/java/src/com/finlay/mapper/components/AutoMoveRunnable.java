@@ -1,5 +1,7 @@
 package com.finlay.mapper.components;
 
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,12 +12,6 @@ public class AutoMoveRunnable implements Runnable {
 	static {
 		logger = LoggerFactory.getLogger(AutoMoveRunnable.class);
 	}
-	
-	private boolean active;
-	
-	public AutoMoveRunnable() {
-		this.active = true;
-	}
 
 	@Override
 	public void run() {
@@ -23,7 +19,7 @@ public class AutoMoveRunnable implements Runnable {
 	
 		int lastSpeed = -1;
 		
-		while(active) {
+		while(AutoMove.getInstance().isActive()) {
 			double startTime = System.nanoTime();
 			
 			int speed = calculateSpeed();
@@ -41,7 +37,20 @@ public class AutoMoveRunnable implements Runnable {
 			
 			double endTime = System.nanoTime();
 			double delta = endTime - startTime;
-			logger.debug("Iteration took {} ns", delta);
+			boolean pause = delta < 166666667;
+			
+			logger.debug("Iteration took {} ns, pausing {}", delta, pause);
+			
+			if(pause) {
+				double pauseTime = 166666667 - delta;
+				long pauseTimeMs = TimeUnit.MILLISECONDS.convert((long) pauseTime, TimeUnit.NANOSECONDS);
+				
+				try {
+					Thread.sleep(pauseTimeMs);
+				} catch (InterruptedException e) {
+					logger.warn("Pause failed");
+				}
+			}
 		}
 		
 		logger.info("Stopped automove");
@@ -63,10 +72,6 @@ public class AutoMoveRunnable implements Runnable {
 		}
 		
 		return speed;
-	}
-	
-	public void stop() {
-		this.active = false;
 	}
 
 }
