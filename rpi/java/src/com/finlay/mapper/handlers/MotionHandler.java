@@ -36,15 +36,17 @@ public class MotionHandler {
 			return;
 		}
 		
-		int speed;
+		int speed = 0;
 		
-		try {
-			speed = (int) event.getMessage().getRequest().getDouble("speed");
-		} catch (NumberFormatException e) {
-			logger.warn("Non-integer speed instead received {}", event.getMessage().getRequest().getString("speed"));
-			JSONOutgoingMessage message = new JSONOutgoingMessage.Builder().setStatusCode(400).setStatusSpecific(2).build();
-			event.getConnection().send(message.toJson());
-			return;
+		if(event.getType() != RequestType.MOTION_HALT) {
+			try {
+				speed = (int) event.getMessage().getRequest().getDouble("speed");
+			} catch (NumberFormatException e) {
+				logger.warn("Non-integer speed instead received {}", event.getMessage().getRequest().getString("speed"));
+				JSONOutgoingMessage message = new JSONOutgoingMessage.Builder().setStatusCode(400).setStatusSpecific(2).build();
+				event.getConnection().send(message.toJson());
+				return;
+			}
 		}
 		
 		switch(event.getType()) {

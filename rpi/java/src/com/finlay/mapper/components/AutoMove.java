@@ -9,6 +9,7 @@ public class AutoMove {
 	
 	static {
 		logger = LoggerFactory.getLogger(AutoMove.class);
+		instance = new AutoMove();
 	}
 	
 	private static AutoMove instance;
@@ -29,6 +30,8 @@ public class AutoMove {
 			logger.info("Automove already active");
 			return;
 		}
+		
+		this.active = true;
 		
 		autoMoveThread = new Thread(new AutoMoveRunnable(), "RPi-AutoMove");
 		autoMoveThread.start();

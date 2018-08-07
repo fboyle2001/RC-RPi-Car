@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.SimpleLogger;
 
+import com.finlay.mapper.components.AutoMove;
+import com.finlay.mapper.components.PiconZero;
 import com.finlay.mapper.connection.SocketServer;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
 import com.finlay.mapper.connection.outgoing.lookup.CodeMessageLookup;
@@ -115,6 +117,12 @@ public class Robot {
 		} catch (IOException | InterruptedException e) {
 			logger.error("{}", e);
 		}
+		
+		logger.info("Stopping AutoMove");
+		AutoMove.getInstance().stop();
+		
+		logger.info("Stopping PiconZero");
+		PiconZero.getInstance().stopMotion();
 		
 		logger.info("Shutdown complete");
 		

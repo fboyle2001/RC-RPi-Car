@@ -92,7 +92,7 @@ $(document).ready(function () {
 
   $("#motion_halt").click(function (e) {
     e.preventDefault();
-    socket.sendRequest(5, {});
+    socket.sendRequest(5, {speed: 0});
   });
 
   $("#sensor_distance").click(function (e) {
