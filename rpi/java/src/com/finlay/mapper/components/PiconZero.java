@@ -203,7 +203,30 @@ public class PiconZero {
 		}
 		
 		return provisionedOutputTypes.get(output);
+	}
+	
+	public void flashDigitalOutput(int output, int delay) {
+		if(output < 0 || output > 5) {
+			throw new IllegalArgumentException("Output channel must be in the range 0 <= output <= 5");
+		}
 		
+		if(provisionedOutputTypes.get(output) == null) {
+			throw new IllegalAccessError(output + " has not been provisioned for use");
+		}
+		
+		if(provisionedOutputTypes.get(output) != PiconZeroOutputType.DIGITAL) {
+			throw new IllegalAccessError(output + " has not been provisioned for digital inputs");
+		}
+		
+		setOutput(output, 1);
+		
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {
+			logger.warn("Interrupted during sleep");
+		}
+		
+		setOutput(output, 0);
 	}
 	
 }

@@ -35,6 +35,10 @@ public class AutoMoveRunnable implements Runnable {
 			if(speed != -1) {
 				if(lastSpeed != speed) {
 					lastSpeed = speed;
+					if(turning) {
+						PiconZero.getInstance().setOutput(1, 0);
+					}
+					
 					logger.info("Travelling forward at speed {}", speed);
 					PiconZero.getInstance().forward(speed);
 					turning = false;
@@ -46,6 +50,7 @@ public class AutoMoveRunnable implements Runnable {
 				}
 				
 				logger.info("Turning");
+				PiconZero.getInstance().setOutput(1, 1);
 				PiconZero.getInstance().right(70);
 				loopsSinceTurn = 0;
 				turning = true;
