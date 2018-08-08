@@ -167,4 +167,14 @@ $(document).ready(function () {
     e.preventDefault();
     socket.sendRequest(11);
   });
+
+  $("#led_on").click(function (e) {
+    e.preventDefault();
+    socket.sendRequest(12, {outputNumber: 0});
+  });
+
+  $("#led_off").click(function (e) {
+    e.preventDefault();
+    socket.sendRequest(13, {outputNumber: 0});
+  });
 });

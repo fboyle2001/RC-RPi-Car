@@ -46,7 +46,7 @@ public class AutoMoveRunnable implements Runnable {
 				}
 				
 				logger.info("Turning");
-				PiconZero.getInstance().right(60);
+				PiconZero.getInstance().right(70);
 				loopsSinceTurn = 0;
 				turning = true;
 				lastSpeed = -1;

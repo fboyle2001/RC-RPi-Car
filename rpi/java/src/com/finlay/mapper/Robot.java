@@ -10,6 +10,7 @@ import org.slf4j.impl.SimpleLogger;
 
 import com.finlay.mapper.components.AutoMove;
 import com.finlay.mapper.components.PiconZero;
+import com.finlay.mapper.components.PiconZeroOutputType;
 import com.finlay.mapper.connection.SocketServer;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
 import com.finlay.mapper.connection.outgoing.lookup.CodeMessageLookup;
@@ -71,6 +72,12 @@ public class Robot {
 		} else {
 			logger.info("--no-hardware option enabled, pin provider not set");
 		}
+		
+		PiconZero.getInstance().setOutputType(0, PiconZeroOutputType.DIGITAL);
+		logger.info("Provisioned LED pin");
+		
+		AutoMove.getInstance();
+		logger.info("Woken AutoMove");
 		
 		this.server = new SocketServer(port);
 		server.start();

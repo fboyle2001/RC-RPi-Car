@@ -29,6 +29,10 @@ public class JSONIncomingRequest {
 		return Double.parseDouble(getString(key));
 	}
 	
+	public boolean has(String key) {
+		return data.containsKey(key);
+	}
+	
 	public int getType() {
 		return type;
 	}

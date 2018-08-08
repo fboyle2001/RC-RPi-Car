@@ -1,6 +1,8 @@
 package com.finlay.mapper.components;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +37,11 @@ public class PiconZero {
 	private int speedOfSound;
 	private GpioPinDigitalMultipurpose ultrasonicSensor;
 	private I2CDevice device;
+	private Map<Integer, PiconZeroOutputType> provisionedOutputTypes;
 	
 	private PiconZero() {
+		this.provisionedOutputTypes = new HashMap<>(5);
+		
 		try {
 			this.retries = ConfigurationFile.getConfigurationOf(Robot.class).getInteger("retries");
 		} catch (NumberFormatException e) {
@@ -145,6 +150,60 @@ public class PiconZero {
 		durationInSeconds /= 2;
 		
 		return durationInSeconds * speedOfSound;
+	}
+	
+	public void setOutputType(int output, PiconZeroOutputType type) {
+		if(output < 0 || output > 5) {
+			throw new IllegalArgumentException("Output channel must be in the range 0 <= output <= 5");
+		}
+		
+		for(int i = 0; i < retries; i++) {
+			try {
+				device.write(output + 2, type.getValue());
+				logger.info("Set output {} mode to {}", output, type.name());
+				provisionedOutputTypes.put(output, type);
+				return;
+			} catch (IOException e) {
+				logger.info("Trying to set output type, attempt {} of {}", i + 1, retries);
+			}
+		}
+		
+		logger.warn("Unable to set output type for output {}", output);
+	}
+	
+	public void setOutput(int output, int value) {
+		if(output < 0 || output > 5) {
+			throw new IllegalArgumentException("Output channel must be in the range 0 <= output <= 5");
+		}
+		
+		if(provisionedOutputTypes.get(output) == null) {
+			throw new IllegalAccessError(output + " has not been provisioned for use");
+		}
+		
+		if(!provisionedOutputTypes.get(output).isInputValid(value)) {
+			throw new IllegalArgumentException("Failed to satisify validation for provisioned type");
+		}
+		
+		for(int i = 0; i < retries; i++) {
+			try {
+				device.write(output + 8, (byte) value);
+				logger.info("Set output {} value to {}", output, value);
+				return;
+			} catch (IOException e) {
+				logger.info("Trying to set output value, attempt {} of {}", i + 1, retries);
+			}
+		}
+		
+		logger.warn("Unable to set output value for output {}", value);
+	}
+	
+	public PiconZeroOutputType getProvisionedOutputType(int output) {
+		if(output < 0 || output > 5) {
+			throw new IllegalArgumentException("Output channel must be in the range 0 <= output <= 5");
+		}
+		
+		return provisionedOutputTypes.get(output);
+		
 	}
 	
 }

@@ -12,7 +12,9 @@ public enum RequestType {
 	SHUTDOWN(8),
 	AUTO_MOVE_START(9),
 	AUTO_MOVE_STOP(10),
-	OVERRIDE_HALT(11);
+	OVERRIDE_HALT(11),
+	LED_ON(12),
+	LED_OFF(13);
 	
 	private int type;
 	
