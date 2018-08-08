@@ -168,13 +168,23 @@ $(document).ready(function () {
     socket.sendRequest(11);
   });
 
-  $("#led_on").click(function (e) {
+  $("#led_red_on").click(function (e) {
     e.preventDefault();
     socket.sendRequest(12, {outputNumber: 0});
   });
 
-  $("#led_off").click(function (e) {
+  $("#led_red_off").click(function (e) {
     e.preventDefault();
     socket.sendRequest(13, {outputNumber: 0});
+  });
+
+  $("#led_green_on").click(function (e) {
+    e.preventDefault();
+    socket.sendRequest(12, {outputNumber: 1});
+  });
+
+  $("#led_green_off").click(function (e) {
+    e.preventDefault();
+    socket.sendRequest(13, {outputNumber: 1});
   });
 });

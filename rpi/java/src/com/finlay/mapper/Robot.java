@@ -74,6 +74,7 @@ public class Robot {
 		}
 		
 		PiconZero.getInstance().setOutputType(0, PiconZeroOutputType.DIGITAL);
+		PiconZero.getInstance().setOutputType(1, PiconZeroOutputType.DIGITAL);
 		logger.info("Provisioned LED pin");
 		
 		AutoMove.getInstance();
