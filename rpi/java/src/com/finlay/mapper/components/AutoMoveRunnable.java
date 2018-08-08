@@ -23,8 +23,9 @@ public class AutoMoveRunnable implements Runnable {
 			double startTime = System.nanoTime();
 			
 			double distanceAhead = PiconZero.getInstance().calculateDistanceToObject();
+			logger.debug("Distance to object is {} m", distanceAhead);
 			
-			if(distanceAhead < 0.15) {
+			if(distanceAhead < 0.2) {
 				logger.debug("Auto Move turn right @ speed 70");
 				forward = false;
 				PiconZero.getInstance().stopMotion();
@@ -61,7 +62,7 @@ public class AutoMoveRunnable implements Runnable {
 			}
 		}
 		
-		logger.info("Stopped automove");
+		logger.info("Stopped Auto Move");
 	}
 
 }

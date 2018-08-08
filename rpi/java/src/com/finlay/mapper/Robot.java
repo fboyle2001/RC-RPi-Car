@@ -129,10 +129,10 @@ public class Robot {
 		logger.info("Stopping AutoMove");
 		AutoMove.getInstance().stop();
 		
+		
 		logger.info("Stopping PiconZero");
 		PiconZero.getInstance().finish();
 		
 		logger.info("Shutdown complete");
-		
 	}
 }
