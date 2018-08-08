@@ -229,4 +229,14 @@ public class PiconZero {
 		setOutput(output, 0);
 	}
 	
+	public void finish() {
+		stopMotion();
+		turnOffAllOutputs();
+	}
+
+	private void turnOffAllOutputs() {
+		for(int output : provisionedOutputTypes.keySet()) {
+			setOutput(output, 0);
+		}
+	}
 }

@@ -130,7 +130,7 @@ public class Robot {
 		AutoMove.getInstance().stop();
 		
 		logger.info("Stopping PiconZero");
-		PiconZero.getInstance().stopMotion();
+		PiconZero.getInstance().finish();
 		
 		logger.info("Shutdown complete");
 		

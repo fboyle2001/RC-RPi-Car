@@ -27,7 +27,7 @@ public class AutoMove {
 	
 	public void start() {
 		if(active) {
-			logger.info("Automove already active");
+			logger.info("Auto Move already active");
 			return;
 		}
 		
@@ -39,11 +39,11 @@ public class AutoMove {
 	
 	public void stop() {
 		if(!active) {
-			logger.info("Automove is not active");
+			logger.info("Auto Move is not active");
 			return;
 		}
 		
-		logger.info("Stopping automove");
+		logger.info("Stopping Auto Move");
 		this.active = false;
 	}
 	

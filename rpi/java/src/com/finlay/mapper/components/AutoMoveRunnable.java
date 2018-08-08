@@ -16,48 +16,34 @@ public class AutoMoveRunnable implements Runnable {
 	@Override
 	public void run() {
 		logger.info("Automove started");
-	
-		int lastSpeed = -1;
-		int loopsSinceTurn = 0;
-		boolean turning = false;
+		
+		boolean forward = false;
 		
 		while(AutoMove.getInstance().isActive()) {
 			double startTime = System.nanoTime();
 			
-			if(loopsSinceTurn >= 20) {
-				logger.info("Unable to find a suitable place to continue moving towards");
+			double distanceAhead = PiconZero.getInstance().calculateDistanceToObject();
+			
+			if(distanceAhead < 0.15) {
+				logger.debug("Auto Move turn right @ speed 70");
+				forward = false;
 				PiconZero.getInstance().stopMotion();
-				break;
-			}
-			
-			int speed = calculateSpeed();
-			
-			if(speed != -1) {
-				if(lastSpeed != speed) {
-					lastSpeed = speed;
-					if(turning) {
-						PiconZero.getInstance().setOutput(1, 0);
-					}
-					
-					logger.info("Travelling forward at speed {}", speed);
-					PiconZero.getInstance().forward(speed);
-					turning = false;
-				}
-			} else {
-				if(turning) {
-					loopsSinceTurn++;
-					continue;
-				}
-				
-				logger.info("Turning");
-				PiconZero.getInstance().setOutput(1, 1);
 				PiconZero.getInstance().right(70);
-				loopsSinceTurn = 0;
-				turning = true;
-				lastSpeed = -1;
+				PiconZero.getInstance().setOutput(1, 1);
+			} else {
+				if(!forward) {
+					logger.debug("Auto Move forward @ speed 70");
+					forward = true;
+					PiconZero.getInstance().stopMotion();
+					PiconZero.getInstance().forward(70);
+					PiconZero.getInstance().setOutput(1, 0);
+				} else {
+					logger.debug("Continue forward");
+				}
 			}
 			
 			double endTime = System.nanoTime();
+			
 			double delta = endTime - startTime;
 			boolean pause = delta < 166666667;
 			
@@ -76,20 +62,6 @@ public class AutoMoveRunnable implements Runnable {
 		}
 		
 		logger.info("Stopped automove");
-	}
-	
-	private int calculateSpeed() {
-		double distanceAhead = PiconZero.getInstance().calculateDistanceToObject();
-		
-		logger.info("Forward distance is {} m", distanceAhead);
-		
-		int speed = -1;
-		
-		if(distanceAhead > 0.15) {
-			speed = 50;
-		}
-		
-		return speed;
 	}
 
 }
