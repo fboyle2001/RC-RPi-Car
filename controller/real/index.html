@@ -17,25 +17,33 @@
         </ul>
       </nav>
     </div>
-    <div class="raw_controls">
+    <div id="raw_controls">
       <div>
         <table class="remote horizontal_centred">
           <tr><td></td><td id="motion_forward"><img class="centred" src="up_arrow.png"></td><td></td></tr>
           <tr><td id="motion_right"><img class="centred" src="right_arrow.png"></td><td id="motion_halt"><img class="centred" src="halt.png"></td><td id="motion_left"><img class="centred" src="left_arrow.png"></td></tr>
           <tr><td></td><td id="motion_reverse"><img class="centred" src="down_arrow.png"></td><td></td></tr>
         </table>
-      <div>
+      </div>
       <div class="speed_setter" style="float: right;">
         <input type="range" min="0" max="100" value="40" id="speed_set" data-show-value="true">
       </div>
     </div>
-    <div class="auto_controls">
+    <div id="auto_controls" style="display: none;">
+      <div>
+        <table class="remote horizontal_centred">
+          <tr><td></td><td id="auto_move_start"><img class="centred" src="start.png"></td><td></td></tr>
+          <tr><td></td><td id="motion_halt"><img class="centred" src="halt.png"></td><td></td></tr>
+          <tr><td></td><td id="auto_move_stop"><img class="centred" src="stop.png"></td><td></td></tr>
+        </table>
+      </div>
     </div>
     <div class="status content">
       <p>Status: <span id="status">Not Connected</span></p>
       <button id="test_connection">Test Connection</button>
       <button id="sensor_distance">Read Sensor Distance</button>
       <button id="shutdown">Shutdown</button>
+      <button id="override_halt">Override Halt</button>
       <pre id="last_response"></pre>
       <div id="initial">
         <label for="hostname">Host Name </label><input type="text" id="hostname" value="10.0.0.17">

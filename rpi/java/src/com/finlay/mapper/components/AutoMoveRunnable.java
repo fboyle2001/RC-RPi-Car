@@ -18,22 +18,38 @@ public class AutoMoveRunnable implements Runnable {
 		logger.info("Automove started");
 	
 		int lastSpeed = -1;
+		int loopsSinceTurn = 0;
+		boolean turning = false;
 		
 		while(AutoMove.getInstance().isActive()) {
 			double startTime = System.nanoTime();
 			
+			if(loopsSinceTurn >= 20) {
+				logger.info("Unable to find a suitable place to continue moving towards");
+				PiconZero.getInstance().stopMotion();
+				break;
+			}
+			
 			int speed = calculateSpeed();
-
+			
 			if(speed != -1) {
 				if(lastSpeed != speed) {
 					lastSpeed = speed;
 					logger.info("Travelling forward at speed {}", speed);
 					PiconZero.getInstance().forward(speed);
+					turning = false;
 				}
 			} else {
-				logger.info("Motion halted; calculating turn");
-				// TODO: need to make a working version for this to be done
-				PiconZero.getInstance().stopMotion();
+				if(turning) {
+					loopsSinceTurn++;
+					continue;
+				}
+				
+				logger.info("Turning");
+				PiconZero.getInstance().right(60);
+				loopsSinceTurn = 0;
+				turning = true;
+				lastSpeed = -1;
 			}
 			
 			double endTime = System.nanoTime();
@@ -64,12 +80,8 @@ public class AutoMoveRunnable implements Runnable {
 		
 		int speed = -1;
 		
-		if(distanceAhead > 1) {
+		if(distanceAhead > 0.15) {
 			speed = 50;
-		} else if (distanceAhead > 0.2) {
-			speed = 40;
-		} else if (distanceAhead > 0.1) {
-			speed = 20;
 		}
 		
 		return speed;

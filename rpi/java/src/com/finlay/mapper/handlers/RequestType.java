@@ -11,7 +11,8 @@ public enum RequestType {
 	TEST_CONNECTION(7),
 	SHUTDOWN(8),
 	AUTO_MOVE_START(9),
-	AUTO_MOVE_STOP(10);
+	AUTO_MOVE_STOP(10),
+	OVERRIDE_HALT(11);
 	
 	private int type;
 	

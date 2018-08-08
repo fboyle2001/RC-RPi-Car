@@ -81,6 +81,11 @@ $(document).ready(function () {
       return;
     }
 
+    $("#menu_options").find("[data-mode='" + currentMode + "']").attr("class", "");
+    $("#menu_options").find("[data-mode='" + mode + "']").attr("class", "current");
+
+    console.log(mode);
+
     currentMode = mode;
 
     if(currentMode == 0) {
@@ -146,5 +151,20 @@ $(document).ready(function () {
   $("#shutdown").click(function (e) {
     e.preventDefault();
     socket.sendRequest(8);
+  });
+
+  $("#auto_move_start").click(function (e) {
+    e.preventDefault();
+    socket.sendRequest(9);
+  });
+
+  $("#auto_move_stop").click(function (e) {
+    e.preventDefault();
+    socket.sendRequest(10);
+  });
+
+  $("#override_halt").click(function (e) {
+    e.preventDefault();
+    socket.sendRequest(11);
   });
 });
