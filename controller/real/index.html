@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="styles.css" rel="stylesheet" type="text/css">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="socket.js"></script>
+    <script src="requests.js"></script>
+  </head>
+  <body>
+    <div class="menu">
+      <nav>
+        <ul id="menu_options">
+          <li class="current" data-mode="0">Raw</li>
+          <li data-mode="1">Assisted</li>
+          <li data-mode="2">Automatic</li>
+        </ul>
+      </nav>
+    </div>
+    <div class="raw_controls">
+      <div>
+        <table class="remote horizontal_centred">
+          <tr><td></td><td id="motion_forward"><img class="centred" src="up_arrow.png"></td><td></td></tr>
+          <tr><td id="motion_right"><img class="centred" src="right_arrow.png"></td><td id="motion_halt"><img class="centred" src="halt.png"></td><td id="motion_left"><img class="centred" src="left_arrow.png"></td></tr>
+          <tr><td></td><td id="motion_reverse"><img class="centred" src="down_arrow.png"></td><td></td></tr>
+        </table>
+      <div>
+      <div class="speed_setter" style="float: right;">
+        <input type="range" min="0" max="100" value="40" id="speed_set" data-show-value="true">
+      </div>
+    </div>
+    <div class="auto_controls">
+    </div>
+    <div class="status content">
+      <p>Status: <span id="status">Not Connected</span></p>
+      <button id="test_connection">Test Connection</button>
+      <button id="sensor_distance">Read Sensor Distance</button>
+      <button id="shutdown">Shutdown</button>
+      <pre id="last_response"></pre>
+      <div id="initial">
+        <label for="hostname">Host Name </label><input type="text" id="hostname" value="10.0.0.17">
+        <br>
+        <label for="port">Port </label><input type="number" id="port" value="5612">
+        <br>
+        <button id="connect">Connect</button>
+        <p id="connect_err"></p>
+      </div>
+    </div>
+  </body>
+</html>
