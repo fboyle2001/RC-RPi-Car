@@ -45,8 +45,6 @@ $(document).ready(function () {
       return;
     }
 
-    console.log(speed)
-
     socket.sendRequest(motionLastDirection, {speed: speed});
   });
 
