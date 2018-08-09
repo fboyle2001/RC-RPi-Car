@@ -1,2 +1,1 @@
-
-Copyright (C) 2018 
+Copyright (C) Finlay Boyle 2018 
