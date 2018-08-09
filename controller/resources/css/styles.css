@@ -34,6 +34,10 @@ h1, h2, h3, h4, h5, h6 {
   transform: translate(-50%, 0%);
 }
 
+.hidden {
+	display: none;
+}
+
 /* Home Page */
 
 .content {
@@ -43,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 	padding-top: 0%;
 }
 
-.menu {
+.sub_main_controls {
 	background-color: #080D0D;
 	box-sizing: border-box;
 	margin-bottom: 3%;
@@ -65,7 +69,7 @@ nav > ul > li:not(.current) {
 
 nav > ul > a > li, nav > ul > li {
 	display: inline-block;
-	width: 31.5%;
+	width: 31.612%;
 	padding: 1.5%;
 	height: 100%;
 	text-align: center;
@@ -80,8 +84,8 @@ nav > ul > a > li, nav > ul > li {
 /* Remote */
 table.remote > tbody > tr > td {
 	position: relative;
-	width: 132px;
-	height: 132px;
+	width: 100px;
+	height: 100px;
 }
 
 div.speed_setter {
