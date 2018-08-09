@@ -4,12 +4,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="./resources/css/styles.css" rel="stylesheet" type="text/css">
     <script src="./resources/js/jquery-3.3.1.min.js"></script>
-    <script src="./resources/js/cache.js"></script>
+    <script src="./resources/js/cache.js" data-v="0.2.1"></script>
     <script src="./resources/js/auth.js"></script>
     <script src="./resources/js/socket.js"></script>
+    <script src="./resources/js/requests.js"></script>
   </head>
   <body>
-    <div id="section_auth" class="centred hidden">
+    <div id="section_auth" class="centred">
       <table>
         <tr><td>Host</td><td><input type="text" id="auth_host" value="10.0.0."></td></tr>
         <tr><td>Port</td><td><input type="text" id="auth_port" value="5612"></td></tr>
@@ -17,7 +18,7 @@
         <tr><td colspan="2" style="text-align: center"><span id="auth_message"></span></td></tr>
       </table>
     </div>
-    <div id="section_main">
+    <div id="section_main" class="hidden">
       <div class="sub_main_controls">
         <nav>
           <ul>
@@ -28,11 +29,15 @@
         </nav>
       </div>
       <div id="sub_raw_controls">
-        <table class="remote content" style="text-align: center">
-          <tr><td></td><td><img id="cc_up_arrow"></td><td></td></tr>
-          <tr><td><img id="cc_left_arrow"></td><td></td><td><img id="cc_right_arrow"></td></tr>
-          <tr><td></td><td><img id="cc_down_arrow"></td><td></td></tr>
-        </table>
+        <div id="wrapper_raw_controls" style="text-align: center">
+          <table class="remote content" style="display: inline-block">
+            <tr><td></td><td><img class="motion" id="cc_up_arrow" data-direction="FORWARD"></td><td></td></tr>
+            <tr><td><img class="motion" id="cc_left_arrow" data-direction="LEFT"></td><td><img class="motion" id="cc_halt" data-direction="HALT"></td><td><img class="motion" id="cc_right_arrow" data-direction="RIGHT"></td></tr>
+            <tr><td></td><td><img class="motion" id="cc_down_arrow" data-direction="REVERSE"></td><td></td></tr>
+          </table>
+        <div class="wrapper_raw_speed">
+          <input id="raw_speed" type="range" min="0" max="100" value="50">
+        </div>
       </div>
     </div>
   </body>

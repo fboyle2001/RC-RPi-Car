@@ -28,24 +28,11 @@ h1, h2, h3, h4, h5, h6 {
   transform: translate(-50%, -50%);
 }
 
-.horizontal_centred {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
 .hidden {
 	display: none;
 }
 
 /* Home Page */
-
-.content {
-	color: #080D0D;
-	box-sizing: border-box;
-	padding: 2%;
-	padding-top: 0%;
-}
 
 .sub_main_controls {
 	background-color: #080D0D;
@@ -88,26 +75,12 @@ table.remote > tbody > tr > td {
 	height: 100px;
 }
 
-div.speed_setter {
-	position: absolute;
-  top: 87%;
-  left: 50%;
-	width: 100%;
-  transform: translate(-50%, -50%);
-}
-
-#speed_set {
-	transform: translate(5%);
+#raw_speed {
 	width: 90%;
 	height: 40px;
 }
 
-div.status {
-	position: absolute;
-	top: 90%;
-}
-
-#speed_set::-webkit-slider-thumb {
+#raw_speed::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 30px;
