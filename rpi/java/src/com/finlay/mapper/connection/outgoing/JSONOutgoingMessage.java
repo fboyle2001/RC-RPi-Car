@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.finlay.mapper.connection.outgoing.lookup.CodeMessageLookup;
+import com.finlay.mapper.handlers.RequestType;
 import com.google.gson.Gson;
 
 public class JSONOutgoingMessage {
@@ -12,15 +13,21 @@ public class JSONOutgoingMessage {
 	private static final Gson gson = new Gson();
 	
 	private JSONOutgoingStatus status;
+	private JSONOutgoingContext context;
 	private Map<String, Object> content;
 	
-	private JSONOutgoingMessage(JSONOutgoingStatus status, Map<String, Object> content) {
+	private JSONOutgoingMessage(JSONOutgoingStatus status, JSONOutgoingContext context, Map<String, Object> content) {
 		this.status = status;
+		this.context = context;
 		this.content = content;
 	}
 	
 	public JSONOutgoingStatus getStatus() {
 		return status;
+	}
+	
+	public JSONOutgoingContext getContext() {
+		return context;
 	}
 	
 	public Map<String, Object> getContent() {
@@ -36,12 +43,14 @@ public class JSONOutgoingMessage {
 		private int code;
 		private String message;
 		private int specific;
+		private int requestType;
 		private Map<String, Object> content;
 		
 		public Builder() {
 			this.code = -1;
 			this.message = null;
 			this.specific = 0;
+			this.requestType = -1;
 			this.content = new HashMap<>();
 		}
 		
@@ -63,6 +72,15 @@ public class JSONOutgoingMessage {
 		public Builder setStatusSpecific(int specific) {
 			this.specific = specific;
 			return this;
+		}
+		
+		public Builder setRequestType(int requestType) {
+			this.requestType = requestType;
+			return this;
+		}
+
+		public Builder setRequestType(RequestType requestType) {
+			return setRequestType(requestType.getType());
 		}
 		
 		public Builder addContent(Map<String, Object> content) {
@@ -96,7 +114,9 @@ public class JSONOutgoingMessage {
 				message = CodeMessageLookup.getDefaultMessage(code);
 			}
 			
-			return new JSONOutgoingMessage(new JSONOutgoingStatus(code, message, specific), content);
+			return new JSONOutgoingMessage(new JSONOutgoingStatus(code, message, specific), 
+					new JSONOutgoingContext(requestType != -1, requestType),
+					content);
 		}
 		
 	}

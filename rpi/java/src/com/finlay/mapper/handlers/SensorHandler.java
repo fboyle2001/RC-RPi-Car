@@ -37,13 +37,23 @@ public class SensorHandler {
 		double distance = PiconZero.getInstance().calculateDistanceToObject();
 		
 		if(distance == -1) {
-			JSONOutgoingMessage response = new JSONOutgoingMessage.Builder().setStatusCode(500).setStatusMessage("Failed to read distance").build();
+			JSONOutgoingMessage response = new JSONOutgoingMessage.Builder()
+					.setStatusCode(500)
+					.setStatusMessage("Failed to read distance")
+					.setRequestType(RequestType.SENSOR_MEASURE_DISTANCE)
+					.build();
+			
 			event.getConnection().send(response.toJson());
 			logger.info("Sent response with error message");
 			return;
 		}
 		
-		JSONOutgoingMessage response = new JSONOutgoingMessage.Builder().setStatusCode(200).setKeyValue("distance", distance).build();
+		JSONOutgoingMessage response = new JSONOutgoingMessage.Builder()
+				.setStatusCode(200)
+				.setRequestType(RequestType.SENSOR_MEASURE_DISTANCE)
+				.setKeyValue("distance", distance)
+				.build();
+		
 		event.getConnection().send(response.toJson());
 		logger.info("Sent response with distance");
 	}

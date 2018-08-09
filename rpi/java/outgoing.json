@@ -4,6 +4,10 @@
         "message": <ASSOCIATED MESSAGE>,
         "specific": <SPECIFIC ERROR>
     },
+    "context": {
+        "response": <BOOLEAN>,
+        "requestType": <REQUEST TYPE>
+    },
     "content": {
         "k1": "v1",
         "k2": "v2",

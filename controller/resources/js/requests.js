@@ -16,7 +16,7 @@ var RequestType = {
 
 var motionLastDirection = RequestType.MOTION_HALT;
 
-function getSpeed() {
+function getRawSpeed() {
   return $("#raw_speed").val();
 }
 
@@ -24,19 +24,29 @@ $(document).ready(function () {
 
   $(".motion").click(function () {
     motionLastDirection = RequestType["MOTION_" + $(this).data("direction")];
-    window.socket.sendRequest(motionLastDirection, {speed: 10});
+    window.socket.sendRequest(motionLastDirection, {speed: getRawSpeed()});
     resetClass("motion");
     alterCachedSource($(this).attr("id"), "_clicked");
   });
 
   $("#raw_speed").change(function (e) {
-    var speed = getSpeed();
+    var speed = getRawSpeed();
 
     if(motionLastDirection == RequestType.MOTION_HALT) {
       return;
     }
 
     socket.sendRequest(motionLastDirection, {speed: getSpeed()});
+  });
+
+  $('[id^="action_"]').click(function () {
+    var actionName = $(this).attr("id").substr(7).toUpperCase();
+
+    if(actionName == "TEST_CONNECTION") {
+      socket.sendRequest(RequestType[actionName], {date: new Date().toLocaleString()})
+    } else {
+      socket.sendRequest(RequestType[actionName]);
+    }
   });
 
 });

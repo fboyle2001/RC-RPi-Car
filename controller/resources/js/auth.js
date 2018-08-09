@@ -14,7 +14,9 @@ var AuthHandlers = {
     console.log("Connected");
 
     $("#section_auth").hide();
+    $("#section_menu").show();
     $("#section_main").show();
+    $("#section_buttons").show();
   }
 }
 

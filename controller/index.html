@@ -6,8 +6,9 @@
     <script src="./resources/js/jquery-3.3.1.min.js"></script>
     <script src="./resources/js/cache.js" data-v="0.2.1"></script>
     <script src="./resources/js/auth.js"></script>
+    <script src="./resources/js/response.js?v=0.2.1"></script>
     <script src="./resources/js/socket.js"></script>
-    <script src="./resources/js/requests.js"></script>
+    <script src="./resources/js/requests.js?v=0.2.1"></script>
   </head>
   <body>
     <div id="section_auth" class="centred">
@@ -18,16 +19,16 @@
         <tr><td colspan="2" style="text-align: center"><span id="auth_message"></span></td></tr>
       </table>
     </div>
+    <div id="section_menu" class="hidden">
+      <nav>
+        <ul>
+          <li class="current" data-mode="0">Raw</li>
+          <li data-mode="1">Assisted</li>
+          <li data-mode="2">Automatic</li>
+        </ul>
+      </nav>
+    </div>
     <div id="section_main" class="hidden">
-      <div class="sub_main_controls">
-        <nav>
-          <ul>
-            <li class="current" data-mode="0">Raw</li>
-            <li data-mode="1">Assisted</li>
-            <li data-mode="2">Automatic</li>
-          </ul>
-        </nav>
-      </div>
       <div id="sub_raw_controls">
         <div id="wrapper_raw_controls" style="text-align: center">
           <table class="remote content" style="display: inline-block">
@@ -38,6 +39,28 @@
         <div class="wrapper_raw_speed">
           <input id="raw_speed" type="range" min="0" max="100" value="50">
         </div>
+      </div>
+    </div>
+    <div id="section_buttons" class="content hidden">
+      <div id="wrapper_buttons">
+        <table class="buttons">
+          <thead>
+            <tr><th>Action</th><th>Last Result</th><th>Command</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Override Halt</td><td id="result_override_halt"></td><td><button id="action_override_halt">Perform</button></td></tr>
+            <tr><td>Test Connection</td><td id="result_test_connection"></td><td><button id="action_test_connection">Perform</button></td></tr>
+            <tr><td>Calculate Distance</td><td id="result_sensor_measure_distance"></td><td><button id="action_sensor_measure_distance">Perform</button></td></tr>
+            <tr><td>Shutdown</td><td id="result_shutdown"></td><td><button id="action_shutdown">Perform</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="section_shutdown" class="shutdown hidden">
+      <div id="wrapper_shutdown" class="centred">
+        <h2 style="text-align: center">Server Shutdown</h2>
+        <p>The server has been shutdown.</p>
+        <p>Refresh to attempt to reconnect if necessary.</p>
       </div>
     </div>
   </body>

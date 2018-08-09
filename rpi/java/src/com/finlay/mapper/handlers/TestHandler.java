@@ -24,6 +24,7 @@ public class TestHandler {
 		
 		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
 				.setStatusCode(200)
+				.setRequestType(RequestType.TEST_CONNECTION)
 				.addContent(event.getMessage().getRequest().getData())
 				.build();
 		

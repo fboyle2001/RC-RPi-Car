@@ -34,6 +34,7 @@ public class OverrideHandler {
 		
 		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
 				.setStatusCode(200)
+				.setRequestType(RequestType.OVERRIDE_HALT)
 				.build();
 		
 		event.getConnection().send(message.toJson());

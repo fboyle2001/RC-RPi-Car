@@ -1,5 +1,6 @@
 package com.finlay.mapper.handlers;
 
+import com.finlay.mapper.Robot;
 import com.finlay.mapper.components.PiconZero;
 import com.finlay.mapper.connection.MessageReceivedEvent;
 
@@ -11,6 +12,10 @@ public class AllHandler {
 
 	@EventMethod
 	public void onMessageReceived(MessageReceivedEvent event) {
+		if(!Robot.isHardwareConnected()) {
+			return;
+		}
+		
 		PiconZero.getInstance().flashDigitalOutput(0, 200);
 	}
 	

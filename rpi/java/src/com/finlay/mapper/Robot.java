@@ -14,6 +14,7 @@ import com.finlay.mapper.components.PiconZeroOutputType;
 import com.finlay.mapper.connection.SocketServer;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
 import com.finlay.mapper.connection.outgoing.lookup.CodeMessageLookup;
+import com.finlay.mapper.handlers.RequestType;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.RaspiGpioProvider;
 import com.pi4j.io.gpio.RaspiPinNumberingScheme;
@@ -118,6 +119,7 @@ public class Robot {
 		
 		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
 				.setStatusCode(CodeMessageLookup.GONE)
+				.setRequestType(RequestType.SHUTDOWN)
 				.build();
 		server.broadcast(message.toJson());
 		

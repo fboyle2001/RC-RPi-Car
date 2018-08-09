@@ -49,10 +49,6 @@ var SocketConnection = function (onMessage, onError) {
 
 window.socket = SocketConnection(handleIncoming, handleError);
 
-function handleIncoming() {
-
-}
-
 function handleError() {
   $("#auth_message").text("Server is busy or not online");
 }

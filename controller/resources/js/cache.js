@@ -39,7 +39,7 @@ function setSource(element) {
 }
 
 function resetClass(clazz) {
-  $(".motion").each(function () {
+  $("." + clazz).each(function () {
     setSource($(this));
   });
 }
