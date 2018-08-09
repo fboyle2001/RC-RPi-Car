@@ -65,7 +65,7 @@ nav > ul > li:not(.current) {
 
 nav > ul > a > li, nav > ul > li {
 	display: inline-block;
-	width: 31.5%; 
+	width: 31.5%;
 	padding: 1.5%;
 	height: 100%;
 	text-align: center;

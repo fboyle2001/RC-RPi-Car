@@ -69,16 +69,17 @@ public class Robot {
 		if(hardware) {
 			GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));
 			logger.info("Set pin provider to BCM");
+			
+			PiconZero.getInstance().setOutputType(0, PiconZeroOutputType.DIGITAL);
+			PiconZero.getInstance().setOutputType(1, PiconZeroOutputType.DIGITAL);
+			logger.info("Provisioned LED pin");
+			
+			AutoMove.getInstance();
+			logger.info("Woken AutoMove");
 		} else {
-			logger.info("--no-hardware option enabled, pin provider not set");
+			logger.info("--no-hardware option enabled");
 		}
 		
-		PiconZero.getInstance().setOutputType(0, PiconZeroOutputType.DIGITAL);
-		PiconZero.getInstance().setOutputType(1, PiconZeroOutputType.DIGITAL);
-		logger.info("Provisioned LED pin");
-		
-		AutoMove.getInstance();
-		logger.info("Woken AutoMove");
 		
 		this.server = new SocketServer(port);
 		server.start();
@@ -126,12 +127,13 @@ public class Robot {
 			logger.error("{}", e);
 		}
 		
-		logger.info("Stopping AutoMove");
-		AutoMove.getInstance().stop();
-		
-		
-		logger.info("Stopping PiconZero");
-		PiconZero.getInstance().finish();
+		if(hardware) {
+			logger.info("Stopping AutoMove");
+			AutoMove.getInstance().stop();
+			
+			logger.info("Stopping PiconZero");
+			PiconZero.getInstance().finish();
+		}
 		
 		logger.info("Shutdown complete");
 	}
