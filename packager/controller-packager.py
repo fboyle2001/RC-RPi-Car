@@ -60,10 +60,7 @@ def package(input_file, version):
     shutil.make_archive("rpi-rc-controller-r" + version, "zip", "./temp/")
     shutil.rmtree("temp")
 
-__name__ = "test"
-
-if __name__ == "test":
-    package("controller.zip", "0.2.0")
+    print("Outputted to rpi-rc-controller-r" + version + ".zip")
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -85,3 +82,5 @@ if __name__ == "__main__":
     if args.version == None:
         print("Version must be set.")
         exit()
+
+    package(args.input_file, args.version)
