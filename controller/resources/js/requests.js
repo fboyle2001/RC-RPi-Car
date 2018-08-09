@@ -21,11 +21,19 @@ function getRawSpeed() {
 }
 
 $(document).ready(function () {
+  $("img").on("dragstart", function(e) {
+    e.preventDefault();
+  });
 
   $(".motion").click(function () {
     motionLastDirection = RequestType["MOTION_" + $(this).data("direction")];
     window.socket.sendRequest(motionLastDirection, {speed: getRawSpeed()});
     resetClass("motion");
+    alterCachedSource($(this).attr("id"), "_clicked");
+  });
+
+  $(".auto").click(function () {
+    resetClass("auto");
     alterCachedSource($(this).attr("id"), "_clicked");
   });
 

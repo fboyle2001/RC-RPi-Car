@@ -1,9 +1,12 @@
 var ImageCache = {
-  up_arrow: "./resources/images/",
-  down_arrow: "./resources/images/",
-  left_arrow: "./resources/images/",
-  right_arrow: "./resources/images/",
-  halt: "./resources/images/",
+  up_arrow: "./resources/images/raw/",
+  down_arrow: "./resources/images/raw/",
+  left_arrow: "./resources/images/raw/",
+  right_arrow: "./resources/images/raw/",
+  motion_halt: "./resources/images/raw/",
+  auto_start: "./resources/images/auto/",
+  auto_stop: "./resources/images/auto/",
+  auto_halt: "./resources/images/auto/"
 }
 
 var IMAGE_CACHE_VERSION = $('script[src*="cache.js"]').data("v");
@@ -66,6 +69,5 @@ function alterCachedSource(elementId, alterName) {
     ext = $(this).attr("cc-ext");
   }
 
-  console.log(ImageCache[ccId] + ccId + alterName + ext + "?v=" + IMAGE_CACHE_VERSION);
   $("#" + elementId).attr("src", ImageCache[ccId] + ccId + alterName + ext + "?v=" + IMAGE_CACHE_VERSION);
 }

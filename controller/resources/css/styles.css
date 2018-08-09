@@ -57,6 +57,10 @@ h1, h2, h3, h4, h5, h6 {
 	border: 2px black solid;
 }
 
+#wrapper_raw_speed {
+	text-align: center;
+}
+
 /* Home Page */
 
 #section_menu {
