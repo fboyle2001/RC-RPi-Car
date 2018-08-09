@@ -9,7 +9,7 @@ var ImageCache = {
   auto_halt: "./resources/images/auto/"
 }
 
-var IMAGE_CACHE_VERSION = $('script[src*="cache.js"]').data("v");
+var IMAGE_CACHE_VERSION = $('script[src*="cache.js"]').data("version");
 
 $(document).ready(function () {
   $("img").each(function () {
