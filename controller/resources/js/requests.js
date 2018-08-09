@@ -33,6 +33,7 @@ $(document).ready(function () {
   });
 
   $(".auto").click(function () {
+    window.socket.sendRequest(RequestType[$(this).data("action").toUpperCase()]);
     resetClass("auto");
     alterCachedSource($(this).attr("id"), "_clicked");
   });

@@ -12,7 +12,7 @@
     <script src="./resources/js/menu.js?v=0.2.111"></script>
   </head>
   <body>
-    <div id="section_auth" class="centred hidden">
+    <div id="section_auth" class="centred">
       <table>
         <tr><td>Host</td><td><input type="text" id="auth_host" value="10.0.0."></td></tr>
         <tr><td>Port</td><td><input type="text" id="auth_port" value="5612"></td></tr>
@@ -20,7 +20,7 @@
         <tr><td colspan="2" style="text-align: center"><span id="auth_message"></span></td></tr>
       </table>
     </div>
-    <div id="section_menu" class="">
+    <div id="section_menu" class="hidden">
       <nav>
         <ul>
           <li class="current" data-mode="0">Raw</li>
@@ -29,7 +29,7 @@
         </ul>
       </nav>
     </div>
-    <div id="section_main" class="">
+    <div id="section_main" class="hidden">
       <div id="sub_raw_controls">
         <div id="wrapper_raw_controls" style="text-align: center">
           <table class="remote content" style="display: inline-block">
@@ -45,14 +45,14 @@
       <div id="sub_auto_controls" class="hidden">
         <div id="wrapper_auto_controls" style="text-align: center">
           <table class="remote content" style="display: inline-block">
-            <tr><td></td><td><img class="auto" id="cc_auto_start"></td><td></td></tr>
-            <tr><td></td><td><img class="auto" id="cc_auto_halt"></td><td></td></tr>
-            <tr><td></td><td><img class="auto" id="cc_auto_stop"></td><td></td></tr>
+            <tr><td></td><td><img class="auto" id="cc_auto_start" data-action="auto_move_start"></td><td></td></tr>
+            <tr><td></td><td><img class="auto" id="cc_auto_halt" data-action="override_halt"></td><td></td></tr>
+            <tr><td></td><td><img class="auto" id="cc_auto_stop" data-action="auto_move_stop"></td><td></td></tr>
           </table>
         </div>
       </div>
     </div>
-    <div id="section_buttons" class="content">
+    <div id="section_buttons" class="content hidden">
       <div id="wrapper_buttons">
         <table class="buttons">
           <thead>
