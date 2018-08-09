@@ -45,7 +45,9 @@ $(document).ready(function () {
       return;
     }
 
-    socket.sendRequest(motionLastDirection, {speed: getSpeed()});
+    console.log(speed)
+
+    socket.sendRequest(motionLastDirection, {speed: speed});
   });
 
   $('[id^="action_"]').click(function () {

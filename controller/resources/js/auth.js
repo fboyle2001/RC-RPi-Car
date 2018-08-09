@@ -44,7 +44,7 @@ $(document).ready(function () {
 });
 
 function waitForAcknowledgement(count, success, failure) {
-  if(count >= 12) {
+  if(count >= 20) {
     failure();
     return false;
   }
