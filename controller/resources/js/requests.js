@@ -32,6 +32,11 @@ $(document).ready(function () {
     alterCachedSource($(this).attr("id"), "_clicked");
   });
 
+  $(".assisted").click(function () {
+    resetClass("assisted");
+    alterCachedSource($(this).attr("id"), "_clicked");
+  });
+
   $(".auto").click(function () {
     window.socket.sendRequest(RequestType[$(this).data("action").toUpperCase()]);
     resetClass("auto");

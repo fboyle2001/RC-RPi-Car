@@ -50,6 +50,10 @@ h1, h2, h3, h4, h5, h6 {
 	background: rgba(255, 255, 255, 0.5);
 }
 
+.remote_wrapper {
+	text-align: center;
+}
+
 #wrapper_shutdown {
 	background: white;
 	width: 50%;
@@ -95,6 +99,10 @@ nav > ul > a > li, nav > ul > li {
 	background-color: white;
 	color: #080D0D;
 	border: 0px;
+}
+
+table.remote {
+	display: inline-block;
 }
 
 /* Remote */

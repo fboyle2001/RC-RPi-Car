@@ -6,7 +6,12 @@ var ImageCache = {
   motion_halt: "./resources/images/raw/",
   auto_start: "./resources/images/auto/",
   auto_stop: "./resources/images/auto/",
-  auto_halt: "./resources/images/auto/"
+  auto_halt: "./resources/images/auto/",
+  assist_forward: "./resources/images/assisted/",
+  assist_halt: "./resources/images/assisted/",
+  assist_reverse: "./resources/images/assisted/",
+  forward_left: "./resources/images/assisted/",
+  forward_right: "./resources/images/assisted/"
 }
 
 var IMAGE_CACHE_VERSION = $('script[src*="cache.js"]').data("version");
