@@ -46,12 +46,13 @@ public class AutoMoveRunnable implements Runnable {
 			double endTime = System.nanoTime();
 			
 			double delta = endTime - startTime;
-			boolean pause = delta < 166666667;
+			// 20 Hz
+			boolean pause = delta < 50000000;
 			
 			logger.debug("Iteration took {} ns, pausing {}", delta, pause);
 			
 			if(pause) {
-				double pauseTime = 166666667 - delta;
+				double pauseTime = 50000000 - delta;
 				long pauseTimeMs = TimeUnit.MILLISECONDS.convert((long) pauseTime, TimeUnit.NANOSECONDS);
 				
 				try {

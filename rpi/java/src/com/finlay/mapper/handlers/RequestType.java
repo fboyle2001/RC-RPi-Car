@@ -14,7 +14,9 @@ public enum RequestType {
 	AUTO_MOVE_STOP(10),
 	OVERRIDE_HALT(11),
 	LED_ON(12),
-	LED_OFF(13);
+	LED_OFF(13),
+	ASSISTED_LEFT(14),
+	ASSISTED_RIGHT(15);
 	
 	private int type;
 	

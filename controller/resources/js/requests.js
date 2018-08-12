@@ -11,7 +11,8 @@ var RequestType = {
   AUTO_MOVE_STOP: 10,
   OVERRIDE_HALT: 11,
   LED_ON: 12,
-  LED_OFF: 13
+  LED_OFF: 13,
+  ASSISTED_RIGHT: 14
 };
 
 var motionLastDirection = RequestType.MOTION_HALT;
@@ -41,6 +42,10 @@ $(document).ready(function () {
     window.socket.sendRequest(RequestType[$(this).data("action").toUpperCase()]);
     resetClass("auto");
     alterCachedSource($(this).attr("id"), "_clicked");
+  });
+
+  $("#cc_forward_right").click(function () {
+    window.socket.sendRequest(RequestType.ASSISTED_RIGHT, {speed: 70});
   });
 
   $("#raw_speed").change(function (e) {
