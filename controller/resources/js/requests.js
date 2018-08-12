@@ -12,7 +12,8 @@ var RequestType = {
   OVERRIDE_HALT: 11,
   LED_ON: 12,
   LED_OFF: 13,
-  ASSISTED_RIGHT: 14
+  ASSISTED_LEFT: 14,
+  ASSISTED_RIGHT: 15
 };
 
 var motionLastDirection = RequestType.MOTION_HALT;
@@ -27,13 +28,14 @@ $(document).ready(function () {
   });
 
   $(".motion").click(function () {
-    motionLastDirection = RequestType["MOTION_" + $(this).data("direction")];
+    motionLastDirection = RequestType[$(this).data("action").toUpperCase()];
     window.socket.sendRequest(motionLastDirection, {speed: getRawSpeed()});
     resetClass("motion");
     alterCachedSource($(this).attr("id"), "_clicked");
   });
 
   $(".assisted").click(function () {
+    window.socket.sendRequest(RequestType[$(this).data("action").toUpperCase()], {speed: 70});
     resetClass("assisted");
     alterCachedSource($(this).attr("id"), "_clicked");
   });
@@ -42,10 +44,6 @@ $(document).ready(function () {
     window.socket.sendRequest(RequestType[$(this).data("action").toUpperCase()]);
     resetClass("auto");
     alterCachedSource($(this).attr("id"), "_clicked");
-  });
-
-  $("#cc_forward_right").click(function () {
-    window.socket.sendRequest(RequestType.ASSISTED_RIGHT, {speed: 70});
   });
 
   $("#raw_speed").change(function (e) {

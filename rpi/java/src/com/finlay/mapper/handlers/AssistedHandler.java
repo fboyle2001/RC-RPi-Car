@@ -22,6 +22,8 @@ public class AssistedHandler {
 			return;
 		}
 		
+		logger.info("Handling message");
+		
 		if(!Robot.isHardwareConnected()) {
 			logger.info("Hardware is not connected. Informing user");
 			JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
@@ -33,6 +35,7 @@ public class AssistedHandler {
 		}
 		
 		if(!event.getMessage().getRequest().has("speed")) {
+			logger.info("No speed set");
 			return;
 		}
 		
@@ -46,8 +49,6 @@ public class AssistedHandler {
 			event.getConnection().send(message.toJson());
 			return;
 		}
-		
-		logger.info("Handling message");
 		
 		if(event.getType() == RequestType.ASSISTED_LEFT) {
 			AssistedTurn.turnLeft(speed, 5);

@@ -33,9 +33,9 @@
       <div id="sub_raw_controls">
         <div id="wrapper_raw_controls" class="remote_wrapper">
           <table class="remote content">
-            <tr><td></td><td><img class="motion" id="cc_up_arrow" data-direction="FORWARD"></td><td></td></tr>
-            <tr><td><img class="motion" id="cc_left_arrow" data-direction="LEFT"></td><td><img class="motion" id="cc_motion_halt" data-direction="HALT"></td><td><img class="motion" id="cc_right_arrow" data-direction="RIGHT"></td></tr>
-            <tr><td></td><td><img class="motion" id="cc_down_arrow" data-direction="REVERSE"></td><td></td></tr>
+            <tr><td></td><td><img class="motion" id="cc_up_arrow" data-action="motion_forward"></td><td></td></tr>
+            <tr><td><img class="motion" id="cc_left_arrow" data-action="motion_left"></td><td><img class="motion" id="cc_motion_halt" data-action="motion_halt"></td><td><img class="motion" id="cc_right_arrow" data-direction="motion_right"></td></tr>
+            <tr><td></td><td><img class="motion" id="cc_down_arrow" data-direction="motion_reverse"></td><td></td></tr>
           </table>
         </div>
         <div id="wrapper_raw_speed">
@@ -45,9 +45,9 @@
       <div id="sub_assisted_controls" class="hidden">
         <div id="wrapper_auto_controls" class="remote_wrapper">
           <table class="remote content">
-            <tr><td></td><td><img class="assisted" id="cc_assist_forward"></td><td></td></tr>
-            <tr><td><img class="assisted" id="cc_forward_left"></td><td><img class="assisted" id="cc_assist_halt"></td><td><img class="assisted" id="cc_forward_right"></td></tr>
-            <tr><td></td><td><img class="assisted" id="cc_assist_reverse"></td><td></td></tr>
+            <tr><td></td><td><img class="assisted" id="cc_assist_forward" data-action="motion_forward"></td><td></td></tr>
+            <tr><td><img class="assisted" id="cc_forward_left" data-action="assisted_left"></td><td><img class="assisted" id="cc_assist_halt" data-action="override_halt"></td><td><img class="assisted" id="cc_forward_right" data-action="assisted_right"></td></tr>
+            <tr><td></td><td><img class="assisted" id="cc_assist_reverse" data-action="motion_reverse"></td><td></td></tr>
           </table>
         </div>
       </div>
