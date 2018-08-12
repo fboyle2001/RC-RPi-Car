@@ -42,14 +42,12 @@ public class JSONOutgoingMessage {
 		
 		private int code;
 		private String message;
-		private int specific;
 		private int requestType;
 		private Map<String, Object> content;
 		
 		public Builder() {
 			this.code = -1;
 			this.message = null;
-			this.specific = 0;
 			this.requestType = -1;
 			this.content = new HashMap<>();
 		}
@@ -68,11 +66,7 @@ public class JSONOutgoingMessage {
 			this.message = message;
 			return this;
 		}
-		
-		public Builder setStatusSpecific(int specific) {
-			this.specific = specific;
-			return this;
-		}
+
 		
 		public Builder setRequestType(int requestType) {
 			this.requestType = requestType;
@@ -105,16 +99,13 @@ public class JSONOutgoingMessage {
 			if(code == -1) {
 				throw new RuntimeException("Status code must be set");
 			}
-			
-			if(specific != 0) {
-				message = CodeMessageLookup.getSpecific(code).getMessage(specific);
-			}
+
 			
 			if(message == null) {
 				message = CodeMessageLookup.getDefaultMessage(code);
 			}
 			
-			return new JSONOutgoingMessage(new JSONOutgoingStatus(code, message, specific), 
+			return new JSONOutgoingMessage(new JSONOutgoingStatus(code, message), 
 					new JSONOutgoingContext(requestType != -1, requestType),
 					content);
 		}

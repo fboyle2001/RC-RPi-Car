@@ -22,7 +22,10 @@ public class MessageProcessor {
 	
 	public static void process(WebSocket connection, String message) {
 		JSONIncomingMessage incoming;
-		JSONOutgoingMessage badRequest = new JSONOutgoingMessage.Builder().setStatusCode(400).setStatusSpecific(1).build();
+		JSONOutgoingMessage badRequest = new JSONOutgoingMessage.Builder()
+				.setStatusCode(400)
+				.setStatusMessage("Invalid format")
+				.build();
 		
 		try {
 			incoming = gson.fromJson(message, JSONIncomingMessage.class);
@@ -54,7 +57,7 @@ public class MessageProcessor {
 			logger.info("Hardware is not connected. Informing user");
 			JSONOutgoingMessage out = new JSONOutgoingMessage.Builder()
 					.setStatusCode(404)
-					.setStatusSpecific(1)
+					.setStatusMessage("Hardware is not connected; action not performed")
 					.build();
 			connection.send(out.toJson());
 			return;

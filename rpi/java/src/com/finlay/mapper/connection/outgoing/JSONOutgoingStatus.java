@@ -4,14 +4,12 @@ public class JSONOutgoingStatus {
 
 	private int code;
 	private String message;
-	private int specific;
 	
 	public JSONOutgoingStatus() {}
 	
-	protected JSONOutgoingStatus(int code, String message, int specific) {
+	protected JSONOutgoingStatus(int code, String message) {
 		this.code = code;
 		this.message = message;
-		this.specific = specific;
 	}
 	
 	public int getCode() {
@@ -22,13 +20,9 @@ public class JSONOutgoingStatus {
 		return message;
 	}
 	
-	public int getSpecific() {
-		return specific;
-	}
-	
 	@Override
 	public String toString() {
-		return code + " (" + specific + "): " + message;
+		return code + ": " + message;
 	}
 	
 }
