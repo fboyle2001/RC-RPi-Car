@@ -4,6 +4,7 @@ import org.java_websocket.WebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.finlay.mapper.Robot;
 import com.finlay.mapper.connection.incoming.JSONIncomingMessage;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
 import com.finlay.mapper.handlers.RequestType;
@@ -48,6 +49,17 @@ public class MessageProcessor {
 		logger.info("Parsed message successfully");
 		
 		RequestType type = RequestType.getByType(incoming.getRequest().getType());
+		
+		if(type.doesRequireHardware() && !Robot.isHardwareConnected()) {
+			logger.info("Hardware is not connected. Informing user");
+			JSONOutgoingMessage out = new JSONOutgoingMessage.Builder()
+					.setStatusCode(404)
+					.setStatusSpecific(1)
+					.build();
+			connection.send(out.toJson());
+			return;
+		}
+		
 		EventManager.callEvent(new MessageReceivedEvent(type, incoming, connection));
 	}
 

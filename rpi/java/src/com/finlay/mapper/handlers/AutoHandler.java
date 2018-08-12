@@ -3,7 +3,6 @@ package com.finlay.mapper.handlers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.finlay.mapper.Robot;
 import com.finlay.mapper.components.AutoMove;
 import com.finlay.mapper.connection.MessageReceivedEvent;
 import com.finlay.mapper.connection.outgoing.JSONOutgoingMessage;
@@ -23,16 +22,6 @@ public class AutoHandler {
 		}
 		
 		logger.info("Handling message");
-		
-		if(!Robot.isHardwareConnected()) {
-			logger.info("Hardware is not connected. Informing user");
-			JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
-					.setStatusCode(404)
-					.setStatusSpecific(1)
-					.build();
-			event.getConnection().send(message.toJson());
-			return;
-		}
 		
 		switch(event.getType()) {
 		case AUTO_MOVE_START:

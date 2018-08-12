@@ -2,30 +2,36 @@ package com.finlay.mapper.handlers;
 
 public enum RequestType {
 
-	MOTION_FORWARD(1),
-	MOTION_REVERSE(2),
-	MOTION_RIGHT(3),
-	MOTION_LEFT(4),
-	MOTION_HALT(5),
-	SENSOR_MEASURE_DISTANCE(6),
-	TEST_CONNECTION(7),
-	SHUTDOWN(8),
-	AUTO_MOVE_START(9),
-	AUTO_MOVE_STOP(10),
-	OVERRIDE_HALT(11),
-	LED_ON(12),
-	LED_OFF(13),
-	ASSISTED_LEFT(14),
-	ASSISTED_RIGHT(15);
+	MOTION_FORWARD(1, true),
+	MOTION_REVERSE(2, true),
+	MOTION_RIGHT(3, true),
+	MOTION_LEFT(4, true),
+	MOTION_HALT(5, true),
+	SENSOR_MEASURE_DISTANCE(6, true),
+	TEST_CONNECTION(7, false),
+	SHUTDOWN(8, false),
+	AUTO_MOVE_START(9, true),
+	AUTO_MOVE_STOP(10, true),
+	OVERRIDE_HALT(11, true),
+	LED_ON(12, true),
+	LED_OFF(13, true),
+	ASSISTED_LEFT(14, true),
+	ASSISTED_RIGHT(15, true);
 	
 	private int type;
+	private boolean requiresHardware;
 	
-	private RequestType(int type) {
+	private RequestType(int type, boolean requiresHardware) {
 		this.type = type;
+		this.requiresHardware = requiresHardware;
 	}
 	
 	public int getType() {
 		return type;
+	}
+	
+	public boolean doesRequireHardware() {
+		return requiresHardware;
 	}
 	
 	public static RequestType getByType(int type) {

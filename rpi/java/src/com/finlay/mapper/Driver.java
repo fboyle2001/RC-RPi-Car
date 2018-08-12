@@ -31,7 +31,7 @@ public class Driver {
 			cmd = parser.parse(options, args);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
-			helpFormatter.printHelp("mapper-server", options);
+			helpFormatter.printHelp("rc-server", options);
 			System.exit(1);
 			return;
 		}
