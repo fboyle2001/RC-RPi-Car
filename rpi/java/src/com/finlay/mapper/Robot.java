@@ -65,6 +65,13 @@ public class Robot {
 		
 		EventManager.start();
 		logger.info("Event Manager started");
+		
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			
+			stop();
+			
+		}));
+		
 		logger.info("Added shutdown hook");
 
 		if(hardware) {
@@ -126,6 +133,7 @@ public class Robot {
 		try {
 			server.stop();
 		} catch (IOException | InterruptedException e) {
+			logger.error("Server error:");
 			logger.error("{}", e);
 		}
 		

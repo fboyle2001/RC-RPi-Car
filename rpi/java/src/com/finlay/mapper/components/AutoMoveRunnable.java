@@ -5,12 +5,18 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.finlay.mapper.Robot;
+
+import lib.finlay.core.io.ConfigurationFile;
+
 public class AutoMoveRunnable implements Runnable {
 	
 	private static final Logger logger;
+	private static final double minTurnDistance;
 	
 	static {
 		logger = LoggerFactory.getLogger(AutoMoveRunnable.class);
+		minTurnDistance = ConfigurationFile.getConfigurationOf(Robot.class).getDouble("auto.minTurnDistance", 0.4);
 	}
 
 	@Override
@@ -25,7 +31,7 @@ public class AutoMoveRunnable implements Runnable {
 			double distanceAhead = PiconZero.getInstance().calculateDistanceToObject();
 			logger.debug("Distance to object is {} m", distanceAhead);
 			
-			if(distanceAhead < 0.2) {
+			if(distanceAhead < minTurnDistance) {
 				logger.debug("Auto Move turn right @ speed 70");
 				forward = false;
 				PiconZero.getInstance().stopMotion();
