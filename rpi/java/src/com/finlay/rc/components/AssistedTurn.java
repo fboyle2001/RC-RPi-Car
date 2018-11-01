@@ -2,11 +2,29 @@ package com.finlay.rc.components;
 
 public class AssistedTurn {
 
-	public static void turnRight(int speed, int duration) {
+	private static boolean override = false;
+	
+	public static void overrideHalt() {
+		override = true;
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		override = false;
+	}
+	
+	public static void performUTurn(int speed, int duration) {
 		PiconZero.getInstance().forward(speed);
 		int left = speed;   //-speed
 		
 		while(left != -speed) {
+			if(override) {
+				return;
+			}
+			
 			PiconZero.getInstance().setMotorSpeed(0, left);
 			left -= 10;
 			try {
@@ -17,6 +35,10 @@ public class AssistedTurn {
 		}
 
 		while(left != speed) {
+			if(override) {
+				return;
+			}
+			
 			PiconZero.getInstance().setMotorSpeed(0, left);
 			left += 10;
 			try {
@@ -25,6 +47,10 @@ public class AssistedTurn {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void turnRight(int speed, int duration) {
+		
 	}
 
 	public static void turnLeft(int speed, int duration) {

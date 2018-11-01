@@ -17,7 +17,8 @@ public class AssistedHandler {
 
 	@EventMethod
 	public void onMessageReceived(MessageReceivedEvent event) {
-		if(event.getType() != RequestType.ASSISTED_LEFT && event.getType() != RequestType.ASSISTED_RIGHT) {
+		if(event.getType() != RequestType.ASSISTED_LEFT && event.getType() != RequestType.ASSISTED_RIGHT
+				&& event.getType() != RequestType.ASSISTED_U_TURN) {
 			return;
 		}
 		
@@ -51,6 +52,8 @@ public class AssistedHandler {
 			AssistedTurn.turnLeft(speed, 5);
 		} else if (event.getType() == RequestType.ASSISTED_RIGHT) {
 			AssistedTurn.turnRight(speed, 5);
+		} else if (event.getType() == RequestType.ASSISTED_U_TURN) {
+			AssistedTurn.performUTurn(speed, 5);
 		}
 		
 		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()

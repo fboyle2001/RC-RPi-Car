@@ -3,6 +3,7 @@ package com.finlay.rc.handlers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.finlay.rc.components.AssistedTurn;
 import com.finlay.rc.components.AutoMove;
 import com.finlay.rc.components.PiconZero;
 import com.finlay.rc.connection.MessageReceivedEvent;
@@ -24,13 +25,17 @@ public class OverrideHandler {
 		
 		logger.info("Handling message");
 		
-		PiconZero.getInstance().stopMotion();
-		
-		logger.info("Stopped motion");
-		
 		AutoMove.getInstance().stop();
 		
 		logger.info("Stopped auto move");
+		
+		AssistedTurn.overrideHalt();
+		
+		logger.info("Stopped assisted turn");
+		
+		PiconZero.getInstance().stopMotion();
+		
+		logger.info("Stopped motion");
 		
 		JSONOutgoingMessage message = new JSONOutgoingMessage.Builder()
 				.setStatusCode(200)
