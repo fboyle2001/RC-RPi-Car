@@ -10,6 +10,7 @@ var ImageCache = {
   assist_forward: "./resources/images/assisted/",
   assist_halt: "./resources/images/assisted/",
   assist_reverse: "./resources/images/assisted/",
+  assist_u_turn: "./resources/images/assisted/",
   forward_left: "./resources/images/assisted/",
   forward_right: "./resources/images/assisted/"
 }
