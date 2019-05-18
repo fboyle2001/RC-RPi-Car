@@ -88,7 +88,7 @@ public class PiconZero {
 	public void forward(int speed) {
 		logger.info("Attempting to set forward speed to {}", speed);
 		setMotorSpeed(0, speed);
-		setMotorSpeed(1, -speed);
+		setMotorSpeed(1, -speed); //software fix due to my bad wiring the car
 	}
 	
 	public void reverse(int speed) {
@@ -115,8 +115,7 @@ public class PiconZero {
 		setMotorSpeed(1, 0);
 	}
 	
-	public double calculateDistanceToObject() {
-		logger.info("Attempting to calculate distance to object");
+	protected double calculateDistanceSilently() {
 		ultrasonicSensor.setMode(PinMode.DIGITAL_OUTPUT);
 		ultrasonicSensor.high();
 		
@@ -150,6 +149,11 @@ public class PiconZero {
 		durationInSeconds /= 2;
 		
 		return durationInSeconds * speedOfSound;
+	}
+	
+	public double calculateDistanceToObject() {
+		logger.info("Attempting to calculate distance to object");
+		return calculateDistanceSilently();
 	}
 	
 	public void setOutputType(int output, PiconZeroOutputType type) {

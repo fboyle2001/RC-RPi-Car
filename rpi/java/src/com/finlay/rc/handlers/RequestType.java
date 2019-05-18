@@ -17,7 +17,9 @@ public enum RequestType {
 	LED_OFF(13, true),
 	ASSISTED_LEFT(14, true),
 	ASSISTED_RIGHT(15, true), 
-	ASSISTED_U_TURN(16, true);
+	ASSISTED_U_TURN(16, true),
+	BEGIN_HUE_SENSOR(17, true),
+	STOP_HUE_SENSOR(18, true);
 	
 	private int type;
 	private boolean requiresHardware;

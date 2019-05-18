@@ -23,6 +23,7 @@ import lib.finlay.core.collections.TreeMapBuilder;
 import lib.finlay.core.events.EventManager;
 import lib.finlay.core.io.ConfigurationDetails;
 import lib.finlay.core.io.ConfigurationFile;
+import me.finlayboyle.hue.HueSystem;
 
 public class Robot {
 
@@ -88,6 +89,8 @@ public class Robot {
 			logger.info("--no-hardware option enabled");
 		}
 		
+		HueSystem.createInstance();
+		logger.info("Woken Hue System");
 		
 		this.server = new SocketServer(port);
 		server.start();
