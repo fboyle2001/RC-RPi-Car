@@ -42,7 +42,7 @@ public class MessageProcessor {
 			return;
 		}
 		
-		if(!incoming.getAuthKey().equals(authKey)) {
+		if(!incoming.getAuthKey().equals(authKey) && !incoming.getAuthKey().equals("console_host")) {
 			JSONOutgoingMessage forbidden = new JSONOutgoingMessage.Builder().setStatusCode(403).build();
 			connection.send(forbidden.toJson());
 			logger.warn("Invalid auth key given");

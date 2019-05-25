@@ -9,6 +9,11 @@ public class JSONIncomingRequest {
 	
 	public JSONIncomingRequest() {}
 	
+	public JSONIncomingRequest(int type, Map<String, Object> data) {
+		this.type = type;
+		this.data = data;
+	}
+	
 	public Map<String, Object> getData() {
 		return data;
 	}

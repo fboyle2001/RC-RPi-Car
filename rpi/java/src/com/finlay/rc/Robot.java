@@ -14,6 +14,7 @@ import com.finlay.rc.components.PiconZeroOutputType;
 import com.finlay.rc.connection.SocketServer;
 import com.finlay.rc.connection.outgoing.JSONOutgoingMessage;
 import com.finlay.rc.connection.outgoing.lookup.CodeMessageLookup;
+import com.finlay.rc.console.ConsoleRunnable;
 import com.finlay.rc.handlers.RequestType;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.RaspiGpioProvider;
@@ -41,12 +42,15 @@ public class Robot {
 	
 	private boolean hardware;
 	private boolean started;
+	private boolean consoleEnabled;
 	private ConfigurationFile config;
 	private SocketServer server;
+	private Thread consoleThread;
 	
-	public Robot(boolean hardware) {
+	public Robot(boolean hardware, boolean consoleEnabled) {
 		this.started = false;
 		this.hardware = hardware;
+		this.consoleEnabled = consoleEnabled;
 	}
 	
 	public void start() {
@@ -91,6 +95,15 @@ public class Robot {
 		
 		HueSystem.createInstance();
 		logger.info("Woken Hue System");
+		
+		if(consoleEnabled) {
+			logger.info("Console flag set; starting console thread");
+			
+			this.consoleThread = new Thread(new ConsoleRunnable());
+			consoleThread.start();
+			
+			logger.info("Started console thread");
+		}
 		
 		this.server = new SocketServer(port);
 		server.start();
@@ -148,6 +161,14 @@ public class Robot {
 			PiconZero.getInstance().finish();
 		}
 		
+		if(consoleEnabled) {
+			// wrap the thread
+		}
+		
 		logger.info("Shutdown complete");
+	}
+	
+	public boolean isConsoleEnabled() {
+		return consoleEnabled;
 	}
 }

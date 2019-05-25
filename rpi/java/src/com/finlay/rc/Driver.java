@@ -22,6 +22,9 @@ public class Driver {
 		
 		Option debug = new Option("d", "debug", false, "Enable to receive debug log messages");
 		options.addOption(debug);
+
+		Option console = new Option("c", "console", false, "Enable console commands for local access to bot");
+		options.addOption(console);
 		
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter helpFormatter = new HelpFormatter();
@@ -52,8 +55,9 @@ public class Driver {
 		}
 		
 		boolean hardware = !cmd.hasOption("no-hardware");
+		boolean consoleEnabled = cmd.hasOption("console");
 		
-		Robot.instance = new Robot(hardware);
+		Robot.instance = new Robot(hardware, consoleEnabled);
 		Robot.instance.start();
 	}
 	
