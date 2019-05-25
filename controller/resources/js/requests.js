@@ -16,7 +16,8 @@ var RequestType = {
   ASSISTED_RIGHT: 15,
   ASSISTED_U_TURN: 16,
   BEGIN_HUE_SENSOR: 17,
-  STOP_HUE_SENSOR: 18
+  STOP_HUE_SENSOR: 18,
+  GET_CURRENT_ACC_READING: 19
 };
 
 var motionLastDirection = RequestType.MOTION_HALT;

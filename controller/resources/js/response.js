@@ -1,6 +1,6 @@
 function handleIncoming(message) {
   console.log(message);
-  
+
   var statusCode = message.status.code;
 
   if(statusCode == 410) {

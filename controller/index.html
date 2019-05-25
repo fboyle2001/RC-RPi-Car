@@ -10,6 +10,7 @@
     <script src="./resources/js/socket.js"></script>
     <script src="./resources/js/requests.js"></script>
     <script src="./resources/js/menu.js"></script>
+    <script src="./resources/js/jquery.canvasjs.min.js"></script>
   </head>
   <body>
     <div id="section_auth" class="centred">
@@ -26,6 +27,7 @@
           <li class="current" data-mode="0">Raw</li>
           <li data-mode="1">Assisted</li>
           <li data-mode="2">Automatic</li>
+          <li data-mode="3">MPU Graph</li>
         </ul>
       </nav>
     </div>
@@ -74,10 +76,13 @@
             <tr><td>Calculate Distance</td><td id="result_sensor_measure_distance"></td><td><button id="action_sensor_measure_distance">Perform</button></td></tr>
             <tr><td>Start Hue Sensor</td><td id="result_begin_hue_sensor"></td><td><button id="action_begin_hue_sensor">Perform</button></td></tr>
             <tr><td>Stop Hue Sensor</td><td id="result_stop_hue_sensor"></td><td><button id="action_stop_hue_sensor">Perform</button></td></tr>
+            <tr><td>Get ACC Reading</td><td id="result_get_current_acc_reading"></td><td><button id="action_get_current_acc_reading">Perform</button></td></tr>
             <tr><td>Shutdown</td><td id="result_shutdown"></td><td><button id="action_shutdown">Perform</button></td></tr>
           </tbody>
         </table>
       </div>
+    </div>
+    <div id="section_graphs" class="content hidden">
     </div>
     <div id="section_shutdown" class="shutdown hidden">
       <div id="wrapper_shutdown" class="centred">
