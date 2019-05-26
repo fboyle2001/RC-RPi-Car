@@ -1,4 +1,4 @@
-package com.finlay.rc.components;
+package com.finlay.rc.components.motion;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

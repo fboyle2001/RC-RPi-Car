@@ -1,4 +1,4 @@
-package com.finlay.rc.components;
+package com.finlay.rc.components.motion;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.finlay.rc.Robot;
+import com.finlay.rc.components.PiconZero;
 
 import lib.finlay.core.io.ConfigurationFile;
 
