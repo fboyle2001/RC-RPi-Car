@@ -66,7 +66,7 @@ public class PiconZero {
 		}
 	}
 	
-	protected void setMotorSpeed(int motor, int value) {
+	public void setMotorSpeed(int motor, int value) {
 		if(motor >= 0 && motor <= 1 && value >= -128 && value < 128) {
 			for(int i = 0; i < retries; i++) {
 				try {

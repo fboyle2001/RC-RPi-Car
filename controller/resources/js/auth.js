@@ -17,6 +17,7 @@ var AuthHandlers = {
     $("#section_menu").show();
     $("#section_main").show();
     $("#section_buttons").show();
+    $("#section_graphs").show();
   }
 }
 

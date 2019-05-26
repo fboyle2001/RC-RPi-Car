@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.SimpleLogger;
 
-import com.finlay.rc.components.AutoMove;
 import com.finlay.rc.components.PiconZero;
 import com.finlay.rc.components.PiconZeroOutputType;
+import com.finlay.rc.components.motion.AutoMove;
 import com.finlay.rc.connection.SocketServer;
 import com.finlay.rc.connection.outgoing.JSONOutgoingMessage;
 import com.finlay.rc.connection.outgoing.lookup.CodeMessageLookup;

@@ -3,7 +3,7 @@ package com.finlay.rc.handlers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.finlay.rc.components.AutoMove;
+import com.finlay.rc.components.motion.AutoMove;
 import com.finlay.rc.connection.MessageReceivedEvent;
 import com.finlay.rc.connection.outgoing.JSONOutgoingMessage;
 

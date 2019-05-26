@@ -22,6 +22,10 @@ function handleIncoming(message) {
     output = message.content.distance + " m";
   } else if (type == RequestType.TEST_CONNECTION) {
     output = message.content[Object.keys(message.content)[0]];
+  } else if (type == RequestType.START_REPEAT_ACC_READER) {
+    //console.log(message.content.reading);
+    processDataPoints(message.content.reading);
+    return;
   }
 
   $("#result_" + key).text(output);

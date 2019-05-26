@@ -19,18 +19,33 @@ public class ConsoleRunnable implements Runnable {
 			
 			if(input.equals("measure")) {
 				MessageProcessor.process(socket, new JSONIncomingMessage.Builder()
-						.setType(RequestType.SENSOR_MEASURE_DISTANCE).build().toJSON());
+						.setType(RequestType.SENSOR_MEASURE_DISTANCE)
+						.build().toJSON());
 			}
 			
 			if(input.equals("shutdown")) {
 				MessageProcessor.process(socket, new JSONIncomingMessage.Builder()
-						.setType(RequestType.SHUTDOWN).build().toJSON());
+						.setType(RequestType.SHUTDOWN)
+						.build().toJSON());
 				break;
 			}
 			
 			if(input.equals("acc")) {
 				MessageProcessor.process(socket, new JSONIncomingMessage.Builder()
-						.setType(RequestType.GET_CURRENT_ACC_READING).build().toJSON());
+						.setType(RequestType.GET_CURRENT_ACC_READING)
+						.build().toJSON());
+			}
+			
+			if(input.equals("rstart")) {
+				MessageProcessor.process(socket, new JSONIncomingMessage.Builder()
+						.setType(RequestType.START_REPEAT_ACC_READER)
+						.build().toJSON());
+			}
+			
+			if(input.equals("rstop")) {
+				MessageProcessor.process(socket, new JSONIncomingMessage.Builder()
+						.setType(RequestType.STOP_REPEAT_ACC_READER)
+						.build().toJSON());
 			}
 		}
 		
